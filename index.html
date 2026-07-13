@@ -66,9 +66,50 @@
             display:block;
             margin:12px auto
         }
-        /* 关于喜来眠 */
+        /* 农家乐轮播样式 */
         .about-box{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-        .about-img{width:100%;border-radius:8px}
+        .about-slider {
+            position: relative;
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 75%;
+        }
+        .slider-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .slider-img.active {
+            opacity: 1;
+        }
+        .slider-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+        }
+        .dot.active {
+            background: #6a9987;
+        }
         /* 菜单菜品样式 - 可点击查看详情 */
         .menu-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
         .menu-item{
@@ -184,10 +225,10 @@
         <a href="#main" class="jump-btn">进入山居</a>
     </header>
 
-    <!-- 导航栏 -->
+    <!-- 导航栏（民宿介绍改为农家乐简介） -->
     <nav id="main">
         <div class="nav-wrap">
-            <a href="#about">民宿介绍</a>
+            <a href="#about">农家乐简介</a>
             <a href="#character">山居三人</a>
             <a href="#book">线上预定</a>
             <a href="#food">家常菜单</a>
@@ -196,38 +237,52 @@
         </div>
     </nav>
 
-    <!-- 民宿介绍 -->
+    <!-- 农家乐简介（替换轮播图） -->
     <section id="about">
-        <h2 class="sec-title">关于喜来眠</h2>
+        <h2 class="sec-title">农家乐简介</h2>
         <div class="about-box">
             <div>
-                <p>群山环抱，溪水绕门，雨村深处藏着一间小小的民宿——喜来眠。</p>
+                <p>群山环抱，溪水绕门，雨村深处藏着一间小小的农家乐——喜来眠。</p>
                 <p>吴邪打理小店，胖子掌勺做饭，小哥守着山野岁岁年年。没有城市喧嚣，只有柴火、晚风、猫狗与三餐烟火。</p>
                 <p>这里是《雨村笔记》里三人安稳的归宿，也是所有稻米心中最温柔的世外桃源。山间四季分明，春有茶田，夏有清溪，秋有桂花，冬有落雪。</p>
                 <p>凡路过雨村之人，皆可推门歇脚，一碗热汤，一间小屋，不问来路，只享清闲。</p>
             </div>
-            <img class="about-img" src="https://picsum.photos/id/1048/800/600" alt="雨村山野民宿">
+            <!-- 本地仓库轮播图 -->
+            <div class="about-slider">
+                <div class="slider-wrapper">
+                    <img class="slider-img active" src="about1.jpg" alt="喜来眠小院外观">
+                    <img class="slider-img" src="about2.jpg" alt="喜来眠竹制门头">
+                    <img class="slider-img" src="about3.jpg" alt="喜来眠室内厅堂">
+                    <img class="slider-img" src="about4.jpg" alt="胖子后厨厨房">
+                </div>
+                <div class="slider-dots">
+                    <span class="dot active" onclick="changeSlide(0)"></span>
+                    <span class="dot" onclick="changeSlide(1)"></span>
+                    <span class="dot" onclick="changeSlide(2)"></span>
+                    <span class="dot" onclick="changeSlide(3)"></span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- 山居三人 -->
+    <!-- 山居三人（本地人物图片路径+小哥新增收银员描述） -->
     <section id="character" style="background:#edf3f0">
         <h2 class="sec-title">山居常住三人</h2>
         <div class="char-box">
             <div class="char-card">
-                <img src="https://picsum.photos/id/1005/300/300" alt="吴邪">
+                <img src="wuxie.jpg" alt="吴邪">
                 <h3>吴邪</h3>
-                <p>民宿老板，打理喜来眠大小琐事，温和通透，守着身边两人安稳度日。</p>
+                <p>农家乐老板，打理喜来眠大小琐事，温和通透，守着身边两人安稳度日。</p>
             </div>
             <div class="char-card">
-                <img src="https://picsum.photos/id/1012/300/300" alt="张起灵">
+                <img src="qiling.jpg" alt="张起灵">
                 <h3>张起灵</h3>
-                <p>常静坐山间，巡山喂鸡，沉默温柔，从此人间有归处。</p>
+                <p>常静坐山间巡山喂鸡，同时兼任农家乐收银员，沉默温柔，从此人间有归处。</p>
             </div>
             <div class="char-card">
-                <img src="https://picsum.photos/id/1027/300/300" alt="王胖子">
+                <img src="pangzi.jpg" alt="王胖子">
                 <h3>王胖子</h3>
-                <p>民宿大厨，厨艺一绝，幽默热闹，撑起喜来眠大半烟火气。</p>
+                <p>农家乐大厨，厨艺一绝，幽默热闹，撑起喜来眠大半烟火气。</p>
             </div>
         </div>
     </section>
@@ -236,12 +291,12 @@
     <section id="book">
         <h2 class="sec-title">线上预定</h2>
         <div class="book-box">
-            <p class="book-desc">喜来眠山居餐饮线上预定正式开启！<br/>无需到店排队，提前预定山野家常菜、特色小吃、专属饮品，沉浸式感受雨村烟火三餐。<br/>三餐四季，山野风味，静待每一位稻米奔赴而来。</p>
+            <p class="book-desc">喜来眠山野农家乐线上预定正式开启！<br/>无需到店排队，提前预定山野家常菜、特色小吃、专属饮品，沉浸式感受雨村烟火三餐。<br/>三餐四季，山野风味，静待每一位稻米奔赴而来。</p>
             <button class="book-btn" onclick="alert('预定功能持续开放中！可留言告知预定菜品、到店时间，我们将为你提前准备～')">立即预定</button>
         </div>
     </section>
 
-    <!-- 家常菜单 -->
+    <!-- 家常菜单（菜品图片、文案完全保留原样未修改） -->
     <section id="food" style="background:#edf3f0">
         <h2 class="sec-title">胖子拿手菜单</h2>
         <h3 style="text-align:center;margin:20px 0 10px;color:#42594f">山野家常菜</h3>
@@ -343,9 +398,9 @@
 
     <!-- 稻米活动 -->
     <section id="activity">
-        <h2 class="sec-title">稻米专属活动</h2>
+        <h2 class="sec-title">稻米专属活动</h3>
         <ul style="font-size:18px;line-height:2.2;padding-left:20px;">
-            <li>8月17日 稻米节专场：民宿全天布置主题装饰，发放纪念明信片、专属周边</li>
+            <li>8月17日 稻米节专场：农家乐全天布置主题装饰，发放纪念明信片、专属周边</li>
             <li>四季打卡活动：春采茶、夏溯溪、秋赏桂、冬围炉，沉浸式体验雨村山居生活</li>
             <li>留言墙长期开放，写下你与盗墓笔记、喜来眠的独家故事</li>
             <li>线下稻米交流会：定期开展同人分享、故事打卡活动，奔赴同一场山海</li>
@@ -383,11 +438,28 @@
 
     <!-- 页脚 -->
     <footer>
-        <p>喜来眠官网 · 雨村山居同人 | 盗墓笔记·雨村笔记</p>
+        <p>喜来眠官网 · 雨村农家乐同人 | 盗墓笔记·雨村笔记</p>
         <p style="margin-top:10px">青山不改，绿水长流，后会有期</p>
     </footer>
 
     <script>
+        // 轮播切换函数
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slider-img');
+        const dots = document.querySelectorAll('.dot');
+        function changeSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            currentSlide = index;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+        // 自动轮播5秒切换
+        setInterval(()=>{
+            let next = (currentSlide + 1) % slides.length;
+            changeSlide(next);
+        },5000)
+
         // 菜品弹窗功能
         function openFoodModal(title,img,desc){
             document.getElementById('modalTitle').innerText = title;
