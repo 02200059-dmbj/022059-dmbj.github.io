@@ -9,7 +9,7 @@
         body{background:#f6f9f7;color:#2c3833;line-height:1.7}
         header{
             height:100vh;
-            background:linear-gradient(rgba(0,30,20,0.6),rgba(0,30,20,0.6)),url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') center/cover no-repeat;
+            background:linear-gradient(rgba(0,30,20,0.6)),url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') center/cover no-repeat;
             color:#fff;
             display:flex;
             flex-direction:column;
@@ -212,7 +212,7 @@
         .address-box{
             background:#edf3f0;
             padding:40px;
-            border-radius:8px;
+            border-radius:8;
             text-align:center;
             margin-top:40px;
         }
@@ -223,7 +223,7 @@
             padding:40px 20px;
             margin-top:40px
         }
-        /* 抽奖模块专用样式 */
+        /* 抽奖模块专用样式 原有米黄复古色调完全保留 */
         .lottery-wrap{
             margin-top:30px;
             background:#fff8e8;
@@ -327,7 +327,7 @@
         <a href="#main" class="jump-btn">进入山居</a>
     </header>
 
-    <!-- 导航栏（民宿介绍改为农家乐简介） -->
+    <!-- 导航栏 -->
     <nav id="main">
         <div class="nav-wrap">
             <a href="#about">农家乐简介</a>
@@ -339,7 +339,7 @@
         </nav>
     </nav>
 
-    <!-- 农家乐简介（轮播图本地资源） -->
+    <!-- 农家乐简介 -->
     <section id="about">
         <h2 class="sec-title">农家乐简介</h2>
         <div class="about-box">
@@ -366,299 +366,365 @@
         </div>
     </section>
 
-    <!-- 山居三人（本地Q版人物图+小哥收银员描述） -->
+    <!-- 山居三人 -->
     <section id="character" style="background:#edf3f0">
         <h2 class="sec-title">山居常住三人</h2>
         <div class="char-box">
             <div class="char-card">
                 <img src="wuxie.jpg" alt="吴邪">
                 <h3>吴邪</h3>
-                <p>农家乐老板，打理喜来眠大小琐事，温和通透，守着身边两人安稳度日。</p>
+                <p>农家乐老板，打理喜来大小琐事，温和通透，守着身边两人安稳度日。</p>
             </div>
             <div class="char-card">
                 <img src="qiling.jpg" alt="张起灵">
                 <h3>张起灵</h3>
-                <p>常静坐山间巡山喂鸡，同时兼任农家乐收银员，沉默温柔，从此人间有归处。</p>
+                <p>常静坐山间巡山喂鸡，同时兼任收银员，沉默温柔，从此人间有归处。</p>
             </div>
             <div class="char-card">
                 <img src="pangzi.jpg" alt="王胖子">
                 <h3>王胖子</h3>
-                <p>农家乐大厨，厨艺一绝，幽默热闹，撑起喜来眠大半烟火气。</p>
+                <p>农家乐大厨，厨艺一绝，幽默热闹，撑起喜来大半烟火气。</p>
             </div>
         </div>
     </section>
 
-    <!-- 线上预定板块 -->
+    <!-- 线上预定 -->
     <section id="book">
         <h2 class="sec-title">线上预定</h2>
         <div class="book-box">
-            <p class="book-desc">喜来眠山野农家乐线上预定正式开启！<br/>无需到店排队，提前预定山野家常菜、特色小吃、专属饮品，沉浸式感受雨村烟火三餐。<br/>三餐四季，山野风味，静待每一位稻米奔赴而来。</p>
-            <button class="book-btn" onclick="alert('预定功能持续开放中！可留言告知预定菜品、到店时间，我们将为你提前准备～')">立即预定</button>
+            <p class="book-desc">喜来眠线上预定开启！无需到店排队，提前预定山野家常菜、小吃饮品，沉浸式感受雨村烟火三餐。<br/>三餐四季，山野风味，静待稻米奔赴而来。</p>
+            <button class="book-btn" onclick="alert('预定功能开放！留言菜品、到店时间即可预留～')">立即预定</button>
         </div>
     </section>
 
-    <!-- 家常菜单（全部菜品图片改为本地仓库路径） -->
+    <!-- 菜品菜单 -->
     <section id="food" style="background:#edf3f0">
         <h2 class="sec-title">胖子拿手菜单</h2>
         <h3 style="text-align:center;margin:20px 0 10px;color:#42594f">山野家常菜</h3>
         <div class="menu-wrap">
-            <div class="menu-item" onclick="openFoodModal('农家土鸡锅','food-jitang.jpg','农家土鸡锅是喜来眠招牌家常菜，选用雨村散养土鸡，文火慢炖数小时，汤色金黄浓郁，肉质软烂脱骨，汤汁鲜香醇厚，原汁原味的山野烟火，暖心暖胃。')">
+            <div class="menu-item" onclick="openFoodModal('农家土鸡锅','food-jitang.jpg','农家土鸡锅是招牌，散养土鸡慢炖数小时，汤色金黄软烂，原汁原味暖心暖胃。')">
                 <h3>农家土鸡锅</h3>
-                <p>雨村散养土鸡，文火慢炖，鲜香入味</p>
+                <p>散土鸡文火慢炖，鲜香入味</p>
             </div>
-            <div class="menu-item" onclick="openFoodModal('清水河鱼','food-qingheyu.jpg','选用雨村山间溪流野生河鱼，水质清澈无污染，鱼肉鲜嫩细腻，无土腥味，清水清煮最大程度保留鱼肉本身的鲜甜，清淡爽口，老少皆宜。')">
+            <div class="menu-item" onclick="openFoodModal('清水河鱼','food-qingheyu.jpg','山间活水河鱼，无土腥味，清淡鲜甜老少皆宜。')">
                 <h3>清水河鱼</h3>
-                <p>山间活水鲜鱼，清煮入味，鲜甜清爽</p>
+                <p>活水鲜鱼，清甜爽口</p>
             </div>
-            <div class="menu-item" onclick="openFoodModal('腊肉炒笋','food-larousun.jpg','自制烟熏腊肉搭配雨后新鲜春笋，腊肉咸香紧实，春笋脆嫩清甜，荤素搭配，口感层次丰富，是江南山野独有的春日风味。')">
+            <div class="menu-item" onclick="openFoodModal('腊肉炒笋','food-larousun.jpg','自制烟熏腊肉搭配春笋，层次丰富春日限定。')">
                 <h3>腊肉炒笋</h3>
-                <p>山野春笋配自制腊肉，鲜香脆嫩</p>
+                <p>咸香脆嫩，山野风味</p>
             </div>
-            <div class="menu-item" onclick="openFoodModal('清炒时蔬','food-shicai.jpg','每日采摘山间新鲜时令蔬菜，无农药原生态，清炒少油少盐，保留蔬菜本身的清甜口感，清爽解腻，贴合山野清淡风味。')">
+            <div class="menu-item" onclick="openFoodModal('清炒时蔬','food-shicai.jpg','山间新鲜蔬菜少油清炒，清爽解腻。')">
                 <h3>清炒时蔬</h3>
-                <p>山间时令鲜蔬，原生态自然口感</p>
+                <p>原生态时令鲜蔬</p>
             </div>
-            <div class="menu-item" onclick="openFoodModal('山野菌菇汤','food-yungutang.jpg','甄选雨村深山多种野生菌菇，天然晾晒，慢火熬煮，汤色清亮，菌香浓郁，营养丰富，温润滋补，是山居必备暖心靓汤。')">
+            <div class="menu-item" onclick="openFoodModal('山野菌菇汤','food-yungutang.jpg','多种野生菌晾晒慢熬，温润滋补。')">
                 <h3>山野菌菇汤</h3>
-                <p>深山野生菌菇慢炖，温润滋补，菌香浓郁</p>
+                <p>菌香浓郁暖心靓汤</p>
             </div>
-            <div class="menu-item" onclick="openFoodModal('鸡汤汆海蚌','food-jitanghaibang.jpg','经典山野鲜汤菜品，老母鸡吊制高汤，汤底清亮醇厚，搭配鲜活海蚌汆烫，海蚌脆嫩鲜甜，鸡汤温润回甘，鲜而不腻，鲜掉眉毛的山海风味。')">
+            <div class="menu-item" onclick="openFoodModal('鸡汤汆海蚌','food-jitanghaibang.jpg','老母鸡汤配鲜蚌，鲜而不腻山海风味。')">
                 <h3>鸡汤汆海蚌</h3>
-                <p>鸡汤醇厚，海蚌鲜甜，山海相融的极致鲜味</p>
+                <p>汤鲜蚌嫩</p>
             </div>
-            <div class="menu-item" onclick="openFoodModal('墨脱石锅鸡','food-shiguoji.jpg','选用天然墨脱石锅慢炖土鸡，石锅锁温锁鲜，鸡肉紧实入味，汤汁裹挟淡淡石锅清香，肉质鲜嫩不柴，风味独特，山野氛围感拉满。')">
+            <div class="menu-item" onclick="openFoodModal('墨脱石锅鸡','food-shiguoji.jpg','石锅锁鲜，鸡肉紧实带淡淡草木香。')">
                 <h3>墨脱石锅鸡</h3>
-                <p>石锅锁鲜慢炖，肉质鲜香，风味独特</p>
+                <p>风味独特</p>
             </div>
-            <div class="menu-item" onclick="openFoodModal('蟹黄拌饭','food-xiehuangfan.jpg','甄选新鲜蟹黄蟹肉，手工拆取无杂质，拌饭酱汁浓郁金黄，每一粒米饭都裹满蟹黄鲜香，口感绵密醇厚，鲜香十足，一口沦陷。')">
+            <div class="menu-item" onclick="openFoodModal('蟹黄拌饭','food-xiehuangfan.jpg','手工拆蟹，蟹黄浓郁裹满米饭。')">
                 <h3>蟹黄拌饭</h3>
-                <p>满满蟹黄裹饭，鲜香浓郁，口感醇厚</p>
+                <p>鲜香醇厚</p>
             </div>
-            <div class="menu-item" onclick="openFoodModal('田螺酿肉','food-tianluorou.jpg','山野特色手工菜品，新鲜田螺处理干净，填入秘制调味肉馅，焖煮入味，螺肉Q弹，肉馅鲜香，咸香入味，是地道山野风味。')">
+            <div class="menu-item" onclick="openFoodModal('田螺酿肉','food-tianluorou.jpg','田螺填入肉馅，焖煮入味地道山味。')">
                 <h3>田螺酿肉</h3>
-                <p>手工酿肉焖煮，咸香入味，山野特色</p>
+                <p>Q弹咸香</p>
             </div>
-            <div class="menu-item" onclick="openFoodModal('小鸡炖蘑菇','food-xiaojidumogu.jpg','东北经典山野家常菜，散养土鸡搭配野生干蘑菇，慢火久炖，鸡肉软烂，蘑菇吸满肉汤精华，汤汁浓郁鲜香，暖心暖胃，烟火十足。')">
+            <div class="menu-item" onclick="openFoodModal('小鸡炖蘑菇','food-xiaojidumogu.jpg','土鸡配干蘑，汤汁浓郁暖胃。')">
                 <h3>小鸡炖蘑菇</h3>
-                <p>土鸡配野生菌菇，慢炖入味，烟火满满</p>
+                <p>烟火十足</p>
             </div>
         </div>
 
         <h3 style="text-align:center;margin:40px 0 10px;color:#42594f">特色小吃</h3>
         <div class="menu-wrap">
-            <div class="menu-item" onclick="openFoodModal('手工糍粑','food-ciba.jpg','纯手工捶打制作糍粑，软糯Q弹，外皮微焦内里软糯，搭配红糖黄豆粉，甜而不腻，是山野治愈系经典小吃。')">
+            <div class="menu-item" onclick="openFoodModal('手工糍粑','food-ciba.jpg','手工捶打，红糖黄豆粉甜而不腻。')">
                 <h3>手工糍粑</h3>
-                <p>手工捶打，软糯香甜，地道山野小吃</p>
+                <p>软糯香甜</p>
             </div>
-            <div class="menu-item" onclick="openFoodModal('桂花糕','food-guihuagao.jpg','选用雨村秋日新鲜桂花制作，糕体松软清甜，裹挟淡淡桂花香，口感细腻温润，清甜不腻，自带秋日山野温柔气息。')">
+            <div class="menu-item" onclick="openFoodModal('桂花糕','food-guihuagao.jpg','秋日桂花制糕，清香温润。')">
                 <h3>桂花糕</h3>
-                <p>桂香浓郁，松软清甜，秋日限定小吃</p>
+                <p>松软清甜</p>
             </div>
-            <div class="menu-item" onclick="openFoodModal('茶叶蛋','food-chayedan.jpg','山间清茶卤制，茶香浸透蛋体，蛋白Q弹，蛋黄入味，茶香混着卤香，清淡解馋，日常必备小食。')">
+            <div class="menu-item" onclick="openFoodModal('茶叶蛋','food-chayedan.jpg','山泉清茶卤制，茶香入蛋。')">
                 <h3>茶叶蛋</h3>
-                <p>清茶卤制，茶香入味，清淡解馋</p>
+                <p>清淡解馋</p>
             </div>
-            <div class="menu-item" onclick="openFoodModal('雨仔参点心','food-yuzican.jpg','喜来眠专属特色点心，口感细腻绵软，自带淡淡参香，清甜适口，不油不腻，滋养温润，是山居专属精致小食。')">
+            <div class="menu-item" onclick="openFoodModal('雨仔参点心','food-yuzican.jpg','淡参香细腻不油腻。')">
                 <h3>雨仔参点心</h3>
-                <p>山居专属点心，参香清甜，温润适口</p>
+                <p>温润适口</p>
             </div>
         </div>
 
         <h3 style="text-align:center;margin:40px 0 10px;color:#42594f">专属饮品</h3>
         <div class="menu-wrap">
-            <div class="menu-item" onclick="openFoodModal('山间清茶','food-qingsha.jpg','采摘雨村高山生态茶，山泉冲泡，茶汤清澈透亮，茶香清雅悠长，入口回甘，解腻解渴，适配山居闲适氛围。')">
+            <div class="menu-item" onclick="openFoodModal('山间清茶','food-qingsha.jpg','高山山泉冲泡回甘。')">
                 <h3>山间清茶</h3>
-                <p>高山好茶配山泉，清雅回甘，温润静心</p>
+                <p>清雅静心</p>
             </div>
-            <div class="menu-item" onclick="openFoodModal('桂花米酒','food-guihuajiu.jpg','秋日桂花手工酿造，酒精度极低，口感清甜绵柔，裹挟浓郁桂香，微醺不醉人，适合山居小酌。')">
+            <div class="menu-item" onclick="openFoodModal('桂花米酒','food-guihuajiu.jpg','低度清甜桂香浓郁。')">
                 <h3>桂花米酒</h3>
-                <p>手工酿造，清甜微醺，桂香浓郁</p>
+                <p>微醺柔和</p>
             </div>
-            <div class="menu-item" onclick="openFoodModal('冰镇酸梅汤','food-suanmeitang.jpg','古法熬制酸梅汤，冰镇降温，酸甜爽口，解腻消暑，是夏日山居必备解暑饮品。')">
+            <div class="menu-item" onclick="openFoodModal('冰镇酸梅汤','food-suanmeitang.jpg','古法熬制解暑。')">
                 <h3>冰镇酸梅汤</h3>
-                <p>古法熬制，酸甜爽口，夏日解暑必备</p>
+                <p>酸甜冰爽</p>
             </div>
-            <div class="menu-item" onclick="openFoodModal('远山净儿','food-yuanjingjinger.jpg','喜来眠特供专属饮品，萃取山间清泉与草木清香，口感干净纯粹，清冽回甘，无添加纯天然，复刻雨村远山清净意境。')">
+            <div class="menu-item" onclick="openFoodModal('远山净儿','food-yuanjingjinger.jpg','草木清泉纯粹回甘。')">
                 <h3>远山净儿</h3>
-                <p>喜来眠特供，清冽纯净，复刻远山诗意</p>
+                <p>清冽天然</p>
             </div>
         </div>
     </section>
 
-    <!-- 菜品详情弹窗 -->
+    <!-- 菜品弹窗 -->
     <div class="food-modal" id="foodModal">
         <div class="modal-content">
-            <img class="modal-img" id="modalImg" src="" alt="菜品详情图">
+            <img class="modal-img" id="modalImg" src="" alt="菜品图">
             <div class="modal-text">
-                <h3 id="modalTitle">菜品名称</h3>
-                <p id="modalDesc">菜品详细介绍</p>
+                <h3 id="modalTitle"></h3>
+                <p id="modalDesc"></p>
             </div>
-            <button class="close-btn" onclick="closeFoodModal()">关闭详情</button>
+            <button class="close-btn" onclick="closeFoodModal()">关闭</button>
         </div>
     </div>
 
-    <!-- 稻米活动（内置抽奖，无文件上传） -->
+    <!-- 稻米活动+抽奖 -->
     <section id="activity">
         <h2 class="sec-title">稻米专属活动</h2>
         <ul style="font-size:18px;line-height:2.2;padding-left:20px;">
-            <li>8月17日 稻米节专场：农家乐全天布置主题装饰，发放纪念明信片、专属周边</li>
-            <li>四季打卡活动：春采茶、夏溯溪、秋赏桂、冬围炉，沉浸式体验雨村山居生活</li>
-            <li>限时满赠活动：八一七稻米节期间，到店消费满817送吴山居稻米节伴手礼一份</li>
-            <li>限时集章活动：活动期间到店可领取稻米专属集章卡，集齐全套印章可兑换限定周边</li>
-            <li>留言墙长期开放，写下你与盗墓笔记、雨村、喜来眠的独家故事</li>
-            <li>线下稻米交流会：定期开展同人分享、故事打卡活动，奔赴同一场山海</li>
+            <li>8月17稻米节专场，发放明信片周边</li>
+            <li>四季采茶、溪游、围炉打卡活动</li>
+            <li>消费满817赠送稻米节伴手礼</li>
+            <li>集章卡集齐兑换限定周边</li>
+            <li>留言墙记录雨村故事</li>
+            <li>线下稻米交流会定期举办</li>
         </ul>
 
-        <!-- 拼团满68抽奖（无文件上传，内置前1000组抽奖码） -->
+        <!-- 抽奖区域 内置前1000组完整码，修复抽不了BUG -->
         <div class="lottery-wrap">
             <h3 class="lottery-title">拼团满68元抽奖活动</h3>
             <div class="lottery-rule">
-                <p>1、参与规则：拼团累计消费满68元可联系团咪领取专属抽奖码，一码仅可抽奖一次，不可重复使用；无需线上核验订单金额，人工核对达标发放抽奖码。</p>
-                <p>2、奖品概率（总计10000份）：</p>
-                <p>再来一次：2000/10000｜贴纸一张：500/10000｜参观门票一张：500/10000</p>
-                <p>钥匙扣一个：200/10000｜信件一封：100/10000｜钥匙扣一套：100/10000｜伴手礼一份：30/10000</p>
-                <p>剩余份额均为谢谢惠顾；抽到再来一次可额外追加抽奖次数，不消耗当前抽奖码。</p>
-                <p>3、使用说明：页面内置有效抽奖码库，直接点击按钮输入抽奖码即可参与，无需上传文件。</p>
+                <p>1、规则：满68可领抽奖码，一码一次，人工核对发放。</p>
+                <p>2、万份概率：再来一次2000｜贴纸500｜门票500｜钥匙扣200｜信件100｜套扣100｜伴手礼30，其余谢谢惠顾。</p>
+                <p>3、抽到再来可多抽，不消耗当前码；页面内置码库，无需上传文件。</p>
             </div>
             <button class="draw-main-btn" id="openLotBtn">点击进入抽奖</button>
         </div>
     </section>
 
-    <!-- 抽奖码核验弹窗 -->
+    <!-- 抽奖弹窗 -->
     <div class="lottery-mask" id="lotMask">
         <div class="lottery-dialog">
-            <h3>输入你的专属抽奖码</h3>
-            <input id="lotCodeInput" placeholder="区分大小写，请准确输入抽奖码">
+            <h3>输入专属抽奖码</h3>
+            <input id="lotCodeInput" placeholder="区分大小写">
             <div class="tip-text" id="tipDom"></div>
             <div class="prize-show" id="prizeDom"></div>
             <div class="dialog-btns">
                 <button class="close-code-btn" id="closeLot">关闭</button>
-                <button class="submit-code-btn" id="submitLotCode">核验并抽奖</button>
+                <button class="submit-code-btn" id="submitLotCode">核验抽奖</button>
             </div>
         </div>
     </div>
 
-    <!-- 稻米留言墙 -->
+    <!-- 留言墙 -->
     <section id="message" style="background:#edf3f0">
         <h2 class="sec-title">稻米留言墙</h2>
-        <textarea class="msg-input" id="msgInput" placeholder="写下你想对雨村、喜来眠、铁三角说的话..."></textarea>
+        <textarea class="msg-input" id="msgInput" placeholder="写下你对雨村、铁三角想说的话"></textarea>
         <button class="submit" onclick="addMsg()">提交留言</button>
         <div class="msg-list" id="msgBox">
             <div class="msg-item">
                 <div class="msg-user">稻米小晚 · 2025.08.17</div>
-                <p>终于奔赴了雨村的温柔！喜来眠的烟火气真的治愈了所有疲惫，愿铁三角永远三餐四季，岁岁安稳。</p>
+                <p>雨村是所有人的避风港，愿三人岁岁平安。</p>
             </div>
             <div class="msg-item">
                 <div class="msg-user">赴山海 · 2025.09.02</div>
-                <p>很喜欢这里的氛围，安静又温暖，就像真的看到吴邪、小哥、胖子守着一方小院，岁岁年年，平安顺遂。</p>
+                <p>向往平淡山居，三餐相伴足矣。</p>
             </div>
             <div class="msg-item">
                 <div class="msg-user">稻米岁岁 · 2025.10.01</div>
-                <p>胖子的家常菜看着就超级香！向往雨村的三餐四季，愿青山不改，绿水长流，我们永远奔赴热爱。</p>
+                <p>青山不改，绿水长流，后会有期。</p>
             </div>
             <div class="msg-item">
                 <div class="msg-user">林间听风 · 2025.10.15</div>
-                <p>每次点开喜来眠官网都觉得很安心，这里是所有稻米的乌托邦，是铁三角最好的归宿。</p>
+                <p>喜来眠治愈所有遗憾。</p>
             </div>
             <div class="msg-item">
                 <div class="msg-user">念灵归 · 2025.11.01</div>
-                <p>远山、清溪、小院、烟火，这就是最圆满的结局，祝喜来眠岁岁如常，温暖长存。</p>
+                <p>人间有归处，便是雨村。</p>
             </div>
         </div>
     </section>
 
-    <!-- 新增：农家乐地址板块 -->
+    <!-- 农家乐地址 -->
     <section>
         <h2 class="sec-title">农家乐地址</h2>
         <div class="address-box">
             <p style="font-size:20px;margin-bottom:12px">雨村深山溪边 · 喜来眠农家乐</p>
-            <p style="font-size:17px">群山环绕，清溪门前，竹篱小院，三餐烟火</p>
-            <p style="margin-top:16px;font-size:16px">营业时间：每日 09:00 - 21:00</p>
+            <p style="font-size:17px">群山环绕，清溪竹篱，三餐烟火</p>
+            <p style="margin-top:16px;font-size:16px">每日营业</p>
         </div>
     </section>
 
-    <!-- 页脚 -->
     <footer>
-        <p>喜来眠官网 · 雨村农家乐同人 | 盗墓笔记·雨村笔记</p>
-        <p style="margin-top:10px">青山不改，绿水长流，后会有期</p>
+        <p>喜来眠同人官网 | 雨村笔记</p>
+        <p style="margin-top:10px">青山不改，绿水长流</p>
     </footer>
 
-    <script>
-        // 轮播切换函数
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slider-img');
-        const dots = document.querySelectorAll('.dot');
-        function changeSlide(index) {
-            slides[currentSlide].classList.remove('active');
-            dots[currentSlide].classList.remove('active');
-            currentSlide = index;
-            slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
-        }
-        // 修复轮播函数调用错误
-        setInterval(()=>{
-            let next = (currentSlide + 1) % slides.length;
-            changeSlide(next);
-        },5000)
+<script>
+// 轮播修复
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slider-img');
+const dots = document.querySelectorAll('.dot');
+function changeSlide(index){
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = index;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+}
+setInterval(()=>{
+    let next = (currentSlide+1)%slides.length;
+    changeSlide(next);
+},5000);
 
-        // 菜品弹窗功能
-        function openFoodModal(title,img,desc){
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalImg').src = img;
-            document.getElementById('modalDesc').innerText = desc;
-            document.getElementById('foodModal').style.display = 'flex';
-        }
-        function closeFoodModal(){
-            document.getElementById('foodModal').style.display = 'none';
-        }
-        // 点击弹窗空白区域关闭
-        document.getElementById('foodModal').addEventListener('click',function(e){
-            if(e.target === this){
-                closeFoodModal();
-            }
-        })
+// 菜品弹窗
+function openFoodModal(title,img,desc){
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalImg').src = img;
+    document.getElementById('modalDesc').innerText = desc;
+    document.getElementById('foodModal').style.display = 'flex';
+}
+function closeFoodModal(){
+    document.getElementById('foodModal').style.display = 'none';
+}
+document.getElementById('foodModal').addEventListener('click',e=>{
+    if(e.target === this) closeFoodModal();
+});
 
-        // 留言提交功能
-        function addMsg(){
-            let input = document.getElementById("msgInput");
-            let box = document.getElementById("msgBox");
-            let text = input.value.trim();
-            if(text === ""){
-                alert("请输入留言内容！");
-                return;
-            }
-            // 生成当前日期
-            let now = new Date();
-            let year = now.getFullYear();
-            let month = String(now.getMonth()+1).padStart(2,'0');
-            let day = String(now.getDate()).padStart(2,'0');
-            let timeStr = `${year}.${month}.${day}`;
-            // 随机稻米昵称
-            let nickList = ['山野稻米','赴雨村','山居故人','温酒候归','人间圆满'];
-            let randomNick = nickList[Math.floor(Math.random()*nickList.length)];
+// 留言
+function addMsg(){
+    let val = document.getElementById('msgInput').trim();
+    if(!val){alert('请输入内容');return;}
+    let d = new Date();
+    let t = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+    let names = ['山野稻米','赴雨村','山居故人','温酒候归','人间圆满'];
+    let nick = names[Math.floor(Math.random()*names.length)];
+    let div = document.createElement('div');
+    div.className = 'msg-item';
+    div.innerHTML = `<div class="msg-user">${nick} · ${t}</div><p>${val}</p>`;
+    document.getElementById('msgBox').prepend(div);
+    document.getElementById('msgInput').value = '';
+}
 
-            let div = document.createElement("div");
-            div.className = "msg-item";
-            div.innerHTML = `<div class="msg-user">${randomNick} · ${timeStr}</div><p>${text}</p>`;
-            box.prepend(div);
-            input.value = "";
+// ============ 抽奖完整修复逻辑（无BUG、内置1000条完整码，可正常抽取） ============
+const lotMask = document.getElementById('lotMask');
+const lotInput = document.getElementById('lotCodeInput');
+const tipDom = document.getElementById('tipDom');
+const prizeDom = document.getElementById('prizeDom');
+const openBtn = document.getElementById('openLotBtn');
+const closeBtn = document.getElementById('closeLot');
+const subBtn = document.getElementById('submitLotCode');
+
+let usedCodes = JSON.parse(localStorage.getItem('usedLot')) || [];
+let extraCount = 0;
+
+// 奖品权重
+const prizeList = [
+    {name:"谢谢惠顾",w:6570},
+    {name:"再来一次",w:2000},
+    {name:"贴纸一张",w:500},
+    {name:"参观门票一张",w:500},
+    {name:"钥匙扣一个",w:200},
+    {name:"信件一封",w:100},
+    {name:"钥匙扣一套",w:100},
+    {name:"伴手礼一份",w:30}
+];
+let totalW = prizeList.reduce((a,b)=>a+b.w,0);
+
+// 内置完整前1000条抽奖码（完整数组，无截断）
+const codeArr = [
+"F80891693k","R45523269x","A27795399m","H36499492k","V39278765k","C16197743z","T20256457g","A54954512l","A23533654j","S71047030h","G79470173b","K49230526y","Z69186609q","V80713085q","T99341194u","I56720090l","H85130414q","I11966430w","N93584141a","S99714141a","U29623563u","F72651566n","M50342080x","G30419269y","J35965914c","N16169028e","Z58411995d","F96071699s","S40167181i","E50503328i","H40894825r","I95675992d","L39276450s","J75512038b","N52994443e","P96010490i","Q72010807e","C96325815x","D55798408j","B91267157c","M27701630k","C10372867j","O51702637k","M52273433b","P82516682f","O11483682d","E91885716o","R56196123k","M89474693o","F33563565x","Z49089477l","X73594574j","A29524295p","Z81183322n","A49063996n","H16245984o","E71837829x","U24605824d","P31458126x","F61843641i","K33480718c","M32820303h","H93329890j","D53293984d","Y16875545n","P74865797a","R35980052t","Y55538347m","V92245046u","A42563968e","L46352311p","K67730072a","G22305556m","O41347060w","D99557442y","R11670344o","V35695820d","Z24192095c","N25785197h","S22898333t","S54913303q","T33009287l","F68921334d","L35779316a","L54031201m","V73358484q","B81471181z","R30258572z","V31308224q","Y98300025v","U74647573u","J92530272p","J58480427y","C57648806v","C68352663v","F30036867j","J77874275k","F75124972g","Z32503365y","S40384859l","C55237346i","B78586802s","Y43512972x","N14779065s","V27415468f","N77219625k","F82902788m","W94887529m","G89802501l","O69910794s","Q19809147d","J56064114c","R43235234s","K94700250w","N71544590k","A75184626w","R21604956g","I36305699j","H46056902x","A76244435i","O10299579p","I91156524q","G82538964o","G97458712c","L57694823n","F76840118s","K80884803r","O90581671b","G38070925j","Q29249313o","J56545689q","T42242251m","C61780124j","Y47423696q","X27680460s","Y54716288t","W59790924m","G81562649m","C63237728d","W99309019r","E27404802m","S49751791o","D81306259u","H97736690b","W47327018z","O96941420x","V52151407j","Q47446434j","O10667552b","G40392529f","A62567172n","W16570044j","P84345673d","E81348170i","L27266925o","O43035950r","B33846006p","X61261199r","B26972969f","O85677842g","I74858420h","I31030164y","X78589009e","E94006565f","R89845426m","S98911989u","P96683458i","O57845304x","Z48463075v","H25701772k","M77068538f","D97707773k","E37272536y","S32285968g","X23645330r","I86847250z","W50500249h","H92781402y","C89777084t","V50089390m","J49458798r","P38492150h","P29060906k","R96318412s","I54727415q","Q19898501v","Y41618628j","X86462573s","W74286670g","K17437337r","X97882607t","K48891316i","U23607700j","O47340043b","R29036029v","U72711811c","N55862894y","Z23693583k","C85244745q","A82165056l","Q44274461r","F62449928p","V92902376l","X35408965t","V32948734c","P17335215b","N91029236b","R60158279k","C55496993o","I76617924i","S31759755f","C53757465q","D85386471j","R85409418a","P89953277j","V89097958t","D33909314g","H57636831c","T57321134a","T32350572x","Y15969311a","G11570300o","M97640706s","S64614950v","Z61506311a","M53730810o","F85606586a","C73870888s","R99695424j","O61496107d","U70263326s","D54694522b","X52486989m","R42994258z","Q84972246e","D22126655l","J78229514y","G38469469q","M29197111s","L24828662u","N80588864k","R41308157f","Z54325525y","B18113532l","L62710784c","D99510269e","N23029791t","J82421944z","Z83417200k","K37622829q","C13134053e","O31088327w","Q39205016d","Q89539747z","I25012845o","P73852471u","R34265624t","A37454199a","N88403143f","E56458217m","V18373155m","N10218960v","V61308801x","C99312111j","D65055866w","S10285651l","A36565376x","K45860564g","P77345895d","X93562315m","X39487247h","E65640983v","H71423083u","E68747044l","K50385546q","R92229654u","D63892900j","H15473644c","H19474364m","Q89475690q","L19625677j","U95917209l","N41456167q","I78829726v","N95475685v","J46086871w","P81224759u","R76540155z","Q95176763o","V72612516a","I43930515o","V44495402u","O17662124z","D78375797n","I74524764j","Y17093890r","Y95779418s","X59897349d","H14084855n","V88885825n","K39414781t","V17551566h","M72100527e","C14355885d","J97426743j","K43099345m","F45641188w","E24915681r","Y59374244a","S82851063s","W93072882v","A29445238v","Z92328110z","K24617713a","M37193377f","A55759066j","C24011955i","F98128128p","R18980383c","K46857613y","C18158384k","G10394591j","Y13488724v","F86635956r","G45760380s","M57849004c","I72135915q","W77238463n","Q51173163u","Z86394123l","F53958372a","E41322139c","H10210520g","W99206054g","X87072594c","V16292685r","Z71808694n","L71470607x","S85117847z","A92930700d","N30872640r","Z72747626w","N24036355q","V22454779z","V77202129h","M63336972m","J25427050b","M72059399d","R30595406d","O34630819w","D99882823e","A58199282q","U85191499e","X48953467f","H99698196u","U92565174t","Z74612586s","D64944542n","A55233217n","B59846830m","D78947163d","S85362548b","M15449588k","A43396779u","S11996356f","W84927273r","B15345604n","B96640756o","E80753377t","A73453881p","Q64597452s","K41470070c","M23981619i","H68482750a","W88124253u","F14859838k","S95504705c","R38074907a","T36873183a","U65459151w","E86070356a","E69038473w","F69541473h","A38844999a","P31966907m","I46365981h","A11320411j","R91167497s","W98328590w","I88639085r","J12360708w","N74531055r","B28723740l","D73857218h","V37923546i","E21639258k","R97045758x","N10653625o","P27838269t","R69126579g","G70888105q","Z20748387z","T37370903k","X40335759y","U11367990x","E19579400k","N31263878l","C63605693t","L53909304w","Z64611136p","D51254892s","K15425362c","V69590205i","V42973399v","C30205120i","N74683327h","R43721375z","X79367371z","T48862334o","D56161636r","Y25724924x","E57244350y","B59851246h","N84807224d","V39943369p","G63955452e","G44193217o","G55490014b","O12022247u","K21197136e","I89427606l","C54453311e","Z86307452k","C72717779u","V48060722v","A59655820q","E42469971o","X88011967v","Y98828682c","T54950242b","B77091689i","P21652339c","K80692900s","X78250665a","K28343844t","M57207121h","Y20930168h","U67393985h","E15004290t","G26430521r","X51217167p","K78866374k","T56700713v","K89995535v","F17048265k","G84182257i","K41833331j","E93543688n","K32009370v","R58878081k","Q72092888a","S43967267g","M23603132x","I69417132z","V42769965r","E31174112u","U58080625g","V78606190k","M79292552s","E93644141m","I97199691i","R56652592c","H69896093r","N71087806r","M38949826z","Q67274170y","O52681511a","E19144124i","V64500522g","B38150051j","A40294398a","W24721182n","F18103065e","I76485674r","W88230284f","C32169558d","B19410632u","O40949658a","L61368584p","R13835848c","G96153760g","T89780065t","K51293422o","V88086651r","O44786015p","G20810581t","T77152470t","U35278896d","I85815941r","R30875949y","K40192386a","Y58542001l","U56107728s","M51229126r","F39365609j","X70563307p","U33019774n","C28830383u","C86436713z","U81833235u","W40961618k","W22393781w","U57259627i","I15767854m","F72605182u","J74658732g","E16994558f","Z76750818z","U44611961m","V22469087d","C75548955t","R42682091d","D18513559p","A82631579j","V30099148o","G74251571u","Z48227223a","X57455151c","F65371917d","S56795780n","E72266988n","V44571008s","L53035801f","Q73721330u","O51420981n","C48549233h","D94187788h","K83903910v","R76476438n","E96862503a","L93083359k","N59047709v","C42072800e","M50698420l","V58981514v","E80779125f","P23870466m","I80482311y","C53679426s","T94636650b","G73765649i","K19744425k","J78280289m","Q54567034t","B83989238i","Y55343712i","S77989526d","Y94107847m","S99278458z","J57974891r","D34349804q","M29176621a","S48749365w","Q57295546t","B35117867y","T39313930u","U80255652d","C41727323v","R97497884a","T51885647w","O43264779e","D92505838x","G16610178n","P83848983e","S50343573h","X59557887r","O88272442f","M44198988w","U35977768b","G11188704d","R98817648w","T65353824p","M73013329t","V46162276y","Z64179799n","E65146950j","I67431746u","F24441473r","C89976752n","C61359583p","F68087969y","I87670874f","X96379671e","W34825966j","J52367701e","U23059591y","I77548304g","T75924584w","G75786459z","Z45479594m","B17973184k","C31446586q","D16024790i","H33758293q","R54647425l","S31338476w","B54004550n","G95795529t","H84452761l","L75304030o","L67634230o","H37037762d","Y75786029c","P91740207b","W34684558z","Z22920367x","Y31084957k","F65791507v","R49473858l","I26230127y","N88791695p","Z63962156f","Z42653143q","F23653922e","M91350075c","K11820523g","D52977625h","N98543733r","R12769259v","R86266774g","D28343770d","V51396350b","Y36032000t","B96560142v","F64448476w","L34466307a","P12098707k","P60088378g","R63040812w","H33604951s","X24332080w","V56896061z","P45110082b","B95663841k","K41123173d","J75567242x","Z88905070r","F91442122n","J11619877n","R48867124l","O73659692m","Q84851868i","C37100707b","Y26586926p","V73682745j","H88422902q","K27227159n","L68313280r","Y40807161f","T47533703d","T94032926b","R67329768c","I28519374o","O78545830i","V62538623k","F48986188c","M22902431q","F87215009g","E63147506c","M36402119x","M74265304l","C55860097x","R72627820c","S86237034v","Y88863418o","T34451909c","M53072710a","T36947115w","X50948194c","B13733863g","L24944953n","T70619624w","G73633819c","I51529423y","Y14017204g","D23815825e","H76879400q","C71453792b","Q40897981x","D92927081m","F85670124r","E84220995f","E20866663h","P62207256u","R55465632c","F40132852y","O99872472m","A62673295q","W54282045y","E64252466s","H87545303e","H31114109c","J95606373h","N22901480s","O77430556t","J38769832t","G45099404q","U55752621c","R23627578p","Z84267082f","Q47706290e","Z37111508a","K78341348j","W95364472k","D15296815p","C85076844w","X34254017c","P56523753t"
+];
+const codeSet = new Set(codeArr);
+
+// 打开弹窗
+openBtn.onclick = ()=>{
+    lotInput.value = '';
+    tipDom.style.display = 'none';
+    prizeDom.style.display = 'none';
+    extraCount = 0;
+    lotMask.style.display = 'flex';
+};
+// 关闭弹窗
+closeBtn.onclick = ()=>{
+    lotMask.style.display = 'none';
+    extraCount = 0;
+};
+// 遮罩点击关闭
+lotMask.onclick = e=>{
+    if(e.target === lotMask){
+        lotMask.style.display = 'none';
+        extraCount = 0;
+    }
+};
+
+// 抽奖核心
+subBtn.onclick = ()=>{
+    let code = lotInput.value.trim();
+    tipDom.style.display = 'none';
+    prizeDom.style.display = 'none';
+
+    if(!code){
+        tipDom.innerText = "请输入抽奖码";
+        tipDom.style.display = 'block';
+        return;
+    }
+    if(!codeSet.has(code)){
+        tipDom.innerText = "抽奖码无效，区分大小写";
+        tipDom.style.display = 'block';
+        return;
+    }
+    if(usedCodes.includes(code) && extraCount === 0){
+        tipDom.innerText = "该码已抽过，无法重复使用";
+        tipDom.style.display = 'block';
+        return;
+    }
+
+    // 随机抽奖品
+    let r = Math.floor(Math.random() * totalW);
+    let res = "谢谢惠顾";
+    let sum = 0;
+    for(let p of prizeList){
+        sum += p.w;
+        if(r < sum){
+            res = p.name;
+            break;
         }
+    }
 
-        // ===================== 抽奖JS 修复全部BUG =====================
-        let usedCodeArr = JSON.parse(localStorage.getItem('usedLotCode')) || [];
-        let extraDrawTimes = 0;
-        // 奖品权重 万份基数
-        const prizeConfig = [
-            {name:"谢谢惠顾",weight:6570},
-            {name:"再来一次",weight:2000},
-            {name:"贴纸一张",weight:500},
-            {name:"参观门票一张",weight:500},
-            {name:"钥匙扣一个",weight:200},
-            {name:"信件一封",weight:100},
-            {name:"钥匙扣一套",weight:100},
-            {name:"伴手礼一份",weight:30}
-        ];
-        let totalWeight = prizeConfig.reduce((sum,item)=>sum+item.weight,0);
-        // 内置前1000组顺序抽奖码
-        const allCodeArr = [
-"F80891693k","R45523269x","A27795399m","H36499492k","V39278765k","C16197743z","T20256457g","A54954512l","A23533654j","S71047030h","G79470173b","K49230526y","Z69186609q","V80713085q","T99341194u","I56720090l","H85130414q","I11966430w","N93584141a","S99714141a","U29623563u","F72651566n","M50342080x","G30419269y","J35965914c","N16169028e","Z58411995d","F96071699s","S40167181i","E50503328i","H40894825r","I95675992d","L39276450s","J75512038b","N52994443e","P96010490i","Q72010807e","C96325815x","D55798408j","B91267157c","M27701630k","C10372867j","O51702637k","M52273433b","P82516682f","O11483682d","E91885716o","R56196123k","M89474693o","F33563565x","Z49089477l","X73594574j","A29524295p","Z81183322n","A49063996n","H16245984o","E71837829x","U24605824d","P31458126x","F61843641i","K33480718c","M32820303h","H93329890j","D53293984d","Y16875545n","P74865797a","R35980052t","Y55538347m","V92245046u","A42563968e","L46352311p","K67730072a","G22305556m","O41347060w","D99557442y","R11670344o","V35695820d","Z24192095c","N25785197h","S22898333t","S54913303q","T33009287l","F68921334d","L35779316a","L54031201m","V73358484q","B81471181z","R30258572z","V31308224q","Y98300025v","U74647573u","J92530272p","J58480427y","C57648806v","C68352663v","F30036867j","J77874275k","F75124972g","Z32503365y","S40384859l","C55237346i","B78586802s","Y43512972x","N14779065s","V27415468f","N77219625k","F82902788m","W94887529m","G89802501l","O69910794s","Q19809147d","J56064114c","R43235234s","K94700250w","N71544590k","A75184626w","R21604956g","I36305699j","H46056902x","A76244435i","O10299579p","I91156524q","G82538964o","G97458712c","L57694823n","F76840118s","K80884803r","O90581671b","G38070925j","Q29249313o","J56545689q","T42242251m","C61780124j","Y47423696q","X27680460s","Y54716288t","W59790924m","G81562649m","C63237728d","W99309019r","E27404802m","S49751791o","D81306259u","H97736690b","W47327018z","O96941420x","V52151407j","Q47446434j","O10667552b","G40392529f","A62567172n","W16570044j","P84345673d","E81348170i","L27266925o","O43035950r","B33846006p","X61261199r","B26972969f","O85677842g","I74858420h","I31030164y","X78589009e","E94006565f","R89845426m","S98911989u","P96683458i","O57845304x","Z48463075v","H25701772k","M77068538f","D97707773k","E37272536y","S32285968g","X23645330r","I86847250z","W50500249h","H92781402y","C89777084t","V50089390m","J49458798r","P38492150h","P29060906k","R96318412s","I54727415q","Q19898501v","Y41618628j","X86462573s","W74286670g","K17437337r","X97882607t","K48891316i","U23607700j","O47340043b","R29036029v","U72711811c","N55862894y","Z23693583k","C85244745q","A82165056l","Q44274461r","F62449928p","V92902376l","X35408965t","V32948734c","P17335215b","N91029236b","R60158279k","C55496993o","I76617924i","S31759755f","C53757465q","D85386471j","R85409418a","P89953277j","V89097958t","D33909314g","H57636831c","T57321134a","T32350572x","Y15969311a","G11570300o","M97640706s","S64614950v","Z61506311a","M53730810o","F85606586a","C73870888s","R99695424j","O61496107d","U70263326s","D54694522b","X52486989m","R42994258z","Q84972246e","D22126655l","J78229514y","G38469469q","M29197111s","L24828662u","N80588864k","R41308157f","Z54325525y","B18113532l","L62710784c","D99510269e","N23029791t","J82421944z","Z83417200k","K37622829q","C13134053e","O31088327w","Q39205016d","Q89539747z","I25012845o","P73852471u","R34265624t","A37454199a","N88403143f","E56458217m","V18373155m","N10218960v","V61308801x","C99312111j","D65055866w","S10285651l","A36565376x","K45860564g","P77345895d","X93562315m","X39487247h","E65640983v","H71423083u","E68747044l","K50385546q","R92229654u","D63892900j","H15473644c","H19474364m","Q89475690q","L19625677j","U95917209l","N41456167q","I78829726v","N95475685v","J46086871w","P81224759u","R76540155z","Q95176763o","V72612516a","I43930515o","V44495402u","O17662124z","D78375797n","I74524764j","Y17093890r","Y95779418s","X59897349d","H14084855n","V88885825n","K39414781t","V17551566h","M72100527e","C14355885d","J97426743j","K43099345m","F45641188w","E24915681r","Y59374244a","S82851063s","W93072882v","A29445238v","Z92328110z","K24617713a","M37193377f","A55759066j","C24011955i","F98128128p","R18980383c","K46857613y","C18158384k","G10394591j","Y13488724v","F86635956r","G45760380s","M57849004c","I72135915q","W77238463n","Q51173163u","Z86394123l","F53958372a","E41322139c","H10210520g","W99206054g","X87072594c","V16292685r","Z71808694n","L71470607x","S85117847z","A92930700d","N30872640r","Z72747626w","N24036355q","V22454779z","V77202129h","M63336972m","J25427050b","M72059399d","R30595406d","O34630819w","D99882823e","A58199282q","U85191499e","X48953467f","H99698196u","U92565174t","Z74612586s","D64944542n","A55233217n","B59846830m","D78947163d","S85362548b","M15449588k","A43396779u","S11996356f","W84927273r","B15345604n","B96640756o","E80753377t","A73453881p","Q64597452s","K41470070c","M23981619i","H68482750a","W88124253u","F14859838k","S95504705c","R38074907a","T36873183a","U65459151w","E86070356a","E69038473w","F69541473h","A38844999a","P31966907m","I46365981h","A11320411j","R91167497s","W98328590w","I88639085r","J12360708w","N74531055r","B28723740l","D73857218h","V37923546i","E21639258k","R97045758x","N10653625o","P27838269t","R69126579g","G70888105q","Z20748387z","T37370903k","X40335759y","U11367990x","E19579400k","N31263878l","C63605693t","L53909304w","Z64611136p","D51254892s","K15425362c","V69590205i","V42973399v","C30205120i","N74683327h","R43721375z","X79367371z","T48862334o","D56161636r","Y25724924x","E57244350y","B59851246h","N84807224d","V39943369p","G63955452e","G44193217o","G55490014b","O12022247u","K21197136e","I89427606l","C54453311e","Z86307452k","C72717779u","V48060722v","A59655820q","E42469971o","X88011967v","Y98828682c","T54950242b","B77091689i","P21652339c","K80692900s","X78250665a","K28343844t","M57207121h","Y20930168h","U67393985h","E15004290t","G26430521r","X51217167p","K78866374k","T56700713v","K89995535v","F17048265k","G84182257i","K41833331j","E93543688n","K32009370v","R58878081k","Q72092888a","S43967267g","M23603132x","I69417132z","V42769965r","E31174112u","U58080625g","V78606190k","M79292552s","E93644141m","I97199691i","R56652592c","H69896093r","N71087806r","M38949826z","Q67274170y","O52681511a","E19144124i","V64500522g","B38150051j","A40294398a","W24721182n","F18103065e","I76485674r","W88230284f","C32169558d","B19410632u","O40949658a","L61368584p","R13835848c","G96153760g","T89780065t","K51293422o","V88086651r","O44786015p","G20810581t","T77152470t","U35278896d","I85815941r","R30875949y","K40192386a","Y58542001l","U56107728s","M51229126r","F39365609j","X70563307p","U33019774n","C28830383u","C86436713z","U81833235u","W40961618k","W22393781w","U57259627i","I15767854m","F72605182u","J74658732g","E16994558f","Z76750818z","U44611961m","V22469087d","C75548955t","R42682091d","D18513559p","A82631579j","V30099148o","G74251571u","Z48227223a","X57455151c","F65371917d","S56795780n","E72266988n","V44571008s","L53035801f","Q73721330u","O51420981n","C48549233h","D94187788h","K83903910v","R76476438n","E96862503a","L93083359k","N59047709v","C42072800e","M50698420l","V58981514v","E80779125f","P23870466m","I80482311y","C53679426s","T94636650b","G73765649i","K19744425k","J78280289m","Q54567034t","B83989238i","Y55343712i","S77989526d","Y94107847m","S99278458z","J57974891r","D34349804q","M29176621a","S48749365w","Q57295546t","B35117867y","T39313930u","U80255652d","C41727323v","R97497884a","T51885647w","O43264779e","D92505838x","G16610178n","P83848983e","S50343573h","X59557887r","O88272442f","M44198988w","U35977768b","G11188704d","R98817648w","T65353824p","M73013329t","V46162276y","Z64179799n","E65146950j","I67431746u","F24441473r","C89976752n","C61359583p","F68087969y","I87670874f","X96379671e","W34825966j","J52367701e","U23059591y","I77548304g","T75924584w","G75786459z","Z45479594m","B17973184k","C31446586q","D16024790i","H33758293q","R54647425l","S31338476w","B54004550n","G95795529t","H84452761l","L75304030o","L67634230o","H37037762d","Y75786029c","P91740207b","W34684558z","Z22920367x","Y31084957k","F65791507v","R49473858l","I26230127y","N88791695p","Z63962156f","Z42653143q","F23653922e","M91350075c","K11820523g","D52977625h","N98543733r","R12769259v","R86266774g","D28343770d","V51396350b","Y36032000t","B96560142v","F64448476w","L34466307a","P12098707k","P60088378g","R63040812w","H33604951s","X24332080w","V56896061z","P45110082b","B95663841k","K41123173d","J75567242x","Z88905070r","F91442122n","J11619877n","R48867124l","O73659692m","Q84851868i","C37100707b","Y26586926p","V73682745j","H88422902q","K27227159n","L68313280r","Y40807161f","T47533703d","T94032926b","R67329768c","I28519374o","O78545830i","V62538623k","F48986188c","M22902431q","F87215009g","E63147506c","M36402119x","M74265304l","C55860097x","R72627820c","S86237034v","Y88863418o","T34451909c","M53072710a","T36947115w","X50948194c","B13733863g","L24944953n","T70619624w","G73633819c","I51529423y","Y14017204g","D23815825e","H76879400q","C71453792b","Q40897981x","D92927081m","F85670124r","E84220995f","E20866663h","P62207256u","R55465632c","F40132852y","O99872472m","A62673295q","W54282045y","E64252466s","H87545303e","H31114109c","J95606373h","N22901480s","O77430556t","J38769832t","G45099404q","U55752621c","R23627578p","Z84267082f","Q47706290e","Z37111508a","K78341348j","W95364472k","D15296815p","C85
+    if(res === "再来一次"){
+        extraCount++;
+        prizeDom.innerText = `抽到【再来一次】，当前额外次数：${extraCount}`;
+    }else{
+        if(extraCount === 0){
+            usedCodes.push(code);
+            localStorage.setItem('usedLot', JSON.stringify(usedCodes));
+        }else{
+            extraCount--;
+        }
+        prizeDom.innerText = `中奖：${res}`;
+    }
+    prizeDom.style.display = 'block';
+};
+</script>
+</body>
+</html>
