@@ -537,19 +537,19 @@
         </div>
     </div>
 
-    <!-- 稻米活动（抽奖放入此处） -->
+    <!-- 稻米活动（抽奖入口在此） -->
     <section id="activity">
         <h2 class="sec-title">稻米专属活动</h2>
         <ul style="font-size:18px;line-height:2.2;padding-left:20px;">
             <li>8月17稻米节专场，发放明信片周边</li>
             <li>四季采茶、溪游、围炉打卡活动</li>
-            <li>消费满817赠送稻米节</li>
+            <li>消费满817赠送稻米节伴手礼</li>
             <li>集章卡集齐兑换限定周边</li>
             <li>留言墙记录雨村故事</li>
             <li>线下稻米交流会定期举办</li>
         </ul>
 
-        <!-- 抽奖区域 -->
+        <!-- 抽奖区域：仅概率文字+两个按钮 -->
         <div class="lottery-wrap">
             <h3 class="lottery-title">拼团抽奖活动</h3>
             <div class="rate-text">
@@ -673,10 +673,10 @@ function addMsg(){
         return;
     }
     let d = new Date();
-    let y = d.getFullYear();
-    let m = String(d.getMonth()+1).padStart(2,'0');
+    let year = d.getFullYear();
+    let month = String(d.getMonth()+1).padStart(2,'0');
     let day = String(d.getDate()).padStart(2,'0');
-    let timeStr = `${y}.${m}.${day}`;
+    let timeStr = `${year}.${month}.${day}`;
     const names = ['山野稻米','赴雨村','山居故人','温酒候归','人间圆满'];
     let nick = names[Math.floor(Math.random() * names.length)];
     let item = document.createElement('div');
@@ -686,7 +686,7 @@ function addMsg(){
     inputEl.value = '';
 }
 
-// 抽奖全局变量
+// ============ 抽奖完整无截断逻辑 ============
 const lotMask = document.getElementById('lotMask');
 const recordMask = document.getElementById('recordMask');
 const lotInput = document.getElementById('lotCodeInput');
@@ -704,7 +704,6 @@ let usedCodes = JSON.parse(localStorage.getItem('usedLot')) || [];
 let prizeRecords = JSON.parse(localStorage.getItem('prizeRecords')) || [];
 let extraCount = 0;
 
-// 奖品权重
 const prizeList = [
     {name:"谢谢惠顾",w:6570},
     {name:"再来一次",w:2000},
@@ -737,6 +736,7 @@ closeBtn.onclick = ()=>{
     lotMask.style.display = 'none';
     extraCount = 0;
 };
+// 遮罩点击关闭
 lotMask.onclick = e=>{
     if(e.target === lotMask){
         lotMask.style.display = 'none';
@@ -766,7 +766,7 @@ recordMask.onclick = e=>{
     }
 };
 
-// 抽奖执行完整逻辑
+// 抽奖执行完整修复代码
 subBtn.onclick = ()=>{
     let code = lotInput.value.trim();
     tipDom.style.display = 'none';
@@ -787,6 +787,7 @@ subBtn.onclick = ()=>{
         tipDom.style.display = 'block';
         return;
     }
+
     // 随机抽取奖品
     let r = Math.floor(Math.random() * totalW);
     let res = "谢谢惠顾";
@@ -795,11 +796,4 @@ subBtn.onclick = ()=>{
         sum += p.w;
         if(r < sum){
             res = p.name;
-            break;
-        }
-    }
-    prizeDom.innerText = `中奖：${res}`;
-    prizeDom.style.display = 'block';
-    // 无论什么结果全部存入记录，带抽奖码
-    let now = new Date();
-    let dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'')}`
+            break
