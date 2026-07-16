@@ -250,25 +250,12 @@
             font-size:17px;
             border-radius:6px;
             cursor:pointer;
-            margin-bottom:12px;
         }
         .draw-main-btn:hover{
             background:#b6600;
         }
-        .record-btn{
-            background:#507c68;
-            color:#fff;
-            border:none;
-            padding:11px 32px;
-            font-size:16px;
-            border-radius:6px;
-            cursor:pointer;
-        }
-        .record-btn:hover{
-            background:#3f6354;
-        }
         /* 抽奖弹窗遮罩 */
-        .lottery-mask, .record-mask{
+        .lottery-mask{
             position:fixed;
             top:0;
             left:0;
@@ -280,13 +267,13 @@
             align-items:center;
             justify-content:center;
         }
-        .lottery-dialog, .record-dialog{
+        .lottery-dialog{
             background:#fff;
             width:440px;
             padding:30px;
             border-radius:12px;
         }
-        .lottery-dialog h3, .record-dialog h3{
+        .lottery-dialog h3{
             color:#36574b;
             margin-bottom:20px;
             text-align:center;
@@ -312,13 +299,6 @@
             margin:18px 0;
             display:none;
         }
-        .tip-save{
-            font-size:15px;
-            color:#c82423;
-            text-align:center;
-            display:none;
-            margin-bottom:15px;
-        }
         .dialog-btns{
             display:flex;
             gap:12px;
@@ -338,24 +318,6 @@
         .close-code-btn{
             background:#ddd;
             color:#222;
-        }
-        /* 中奖记录弹窗 */
-        .record-list{
-            max-height:300px;
-            overflow-y:auto;
-            border:1px solid #eee;
-            padding:10px;
-            margin-bottom:20px;
-        }
-        .record-item{
-            padding:6px 0;
-            border-bottom:1px solid #eee;
-            font-size:14px;
-        }
-        .empty-tip{
-            text-align:center;
-            color:#777;
-            padding:20px 0;
         }
     </style>
 </head>
@@ -537,7 +499,7 @@
         </div>
     </div>
 
-    <!-- 稻米活动（抽奖入口在此） -->
+    <!-- 稻米活动（抽奖放入此处） -->
     <section id="activity">
         <h2 class="sec-title">稻米专属活动</h2>
         <ul style="font-size:18px;line-height:2.2;padding-left:20px;">
@@ -549,7 +511,7 @@
             <li>线下稻米交流会定期举办</li>
         </ul>
 
-        <!-- 抽奖区域：仅概率文字+两个按钮 -->
+        <!-- 抽奖词条：只保留概率+参与按钮，无多余文字 -->
         <div class="lottery-wrap">
             <h3 class="lottery-title">拼团抽奖活动</h3>
             <div class="rate-text">
@@ -557,33 +519,19 @@
                 钥匙扣：2%｜信件：1%｜钥匙套：1%｜伴手礼：0.3%｜谢谢惠顾：65.7%
             </div>
             <button class="draw-main-btn" id="openLotBtn">参与抽奖</button>
-            <br>
-            <button class="record-btn" id="openRecordBtn">我的中奖记录</button>
         </div>
     </section>
 
-    <!-- 抽奖弹窗 -->
+    <!-- 抽奖弹窗（默认隐藏，点击按钮弹出） -->
     <div class="lottery-mask" id="lotMask">
         <div class="lottery-dialog">
             <h3>输入专属抽奖码</h3>
             <input id="lotCodeInput" placeholder="区分大小写">
             <div class="tip-text" id="tipDom"></div>
             <div class="prize-show" id="prizeDom"></div>
-            <div class="tip-save" id="saveTip">记得截图保存页面，找团咪兑换奖品</div>
             <div class="dialog-btns">
                 <button class="close-code-btn" id="closeLot">关闭</button>
                 <button class="submit-code-btn" id="submitLotCode">核验抽奖</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 中奖记录弹窗 -->
-    <div class="record-mask" id="recordMask">
-        <div class="record-dialog">
-            <h3>我的中奖记录</h3>
-            <div class="record-list" id="recordBox"></div>
-            <div class="dialog-btns" style="justify-content:center;">
-                <button class="close-code-btn" id="closeRecord">关闭</button>
             </div>
         </div>
     </div>
@@ -633,7 +581,7 @@
     </footer>
 
 <script>
-// 轮播自动切换
+// 轮播
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slider-img');
 const dots = document.querySelectorAll('.dot');
@@ -663,7 +611,7 @@ document.getElementById('foodModal').addEventListener('click', e=>{
     if(e.target === e.currentTarget) closeFoodModal();
 });
 
-// 留言提交
+// 留言功能修复
 function addMsg(){
     const inputEl = document.getElementById('msgInput');
     const boxEl = document.getElementById('msgBox');
@@ -686,22 +634,16 @@ function addMsg(){
     inputEl.value = '';
 }
 
-// ============ 抽奖完整无截断逻辑 ============
+// ============ 抽奖逻辑 ============
 const lotMask = document.getElementById('lotMask');
-const recordMask = document.getElementById('recordMask');
 const lotInput = document.getElementById('lotCodeInput');
 const tipDom = document.getElementById('tipDom');
 const prizeDom = document.getElementById('prizeDom');
-const saveTip = document.getElementById('saveTip');
-const openLotBtn = document.getElementById('openLotBtn');
-const openRecordBtn = document.getElementById('openRecordBtn');
-const closeLot = document.getElementById('closeLot');
-const closeRecord = document.getElementById('closeRecord');
+const openBtn = document.getElementById('openLotBtn');
+const closeBtn = document.getElementById('closeLot');
 const subBtn = document.getElementById('submitLotCode');
-const recordBox = document.getElementById('recordBox');
 
 let usedCodes = JSON.parse(localStorage.getItem('usedLot')) || [];
-let prizeRecords = JSON.parse(localStorage.getItem('prizeRecords')) || [];
 let extraCount = 0;
 
 const prizeList = [
@@ -716,27 +658,24 @@ const prizeList = [
 ];
 let totalW = prizeList.reduce((a,b)=>a+b.w,0);
 
-// 内置抽奖码库
+// 内置完整前1000组抽奖码
 const codeArr = [
 "F80891693k","R45523269x","A27795399m","H36499492k","V39278765k","C16197743z","T20256457g","A54954512l","A23533654j","S71047030h","G79470173b","K49230526y","Z69186609q","V80713085q","T99341194u","I56720090l","H85130414q","I11966430w","N93584141a","S99714141a","U29623563u","F72651566n","M50342080x","G30419269y","J35965914c","N16169028e","Z58411995d","F96071699s","S40167181i","E50503328i","H40894825r","I95675992d","L39276450s","J75512038b","N52994443e","P96010490i","Q72010807e","C96325815x","D55798408j","B91267157c","M27701630k","C10372867j","O51702637k","M52273433b","P82516682f","O11483682d","E91885716o","R56196123k","M89474693o","F33563565x","Z49089477l","X73594574j","A29524295p","Z81183322n","A49063996n","H16245984o","E71837829x","U24605824d","P31458126x","F61843641i","K33480718c","M32820303h","H93329890j","D53293984d","Y16875545n","P74865797a","R35980052t","Y55538347m","V92245046u","A42563968e","L46352311p","K67730072a","G22305556m","O41347060w","D99557442y","R11670344o","V35695820d","Z24192095c","N25785197h","S22898333t","S54913303q","T33009287l","F68921334d","L35779316a","L54031201m","V73358484q","B81471181z","R30258572z","V31308224q","Y98300025v","U74647573u","J92530272p","J58480427y","C57648806v","C68352663v","F30036867j","J77874275k","F75124972g","Z32503365y","S40384859l","C55237346i","B78586802s","Y43512972x","N14779065s","V27415468f","N77219625k","F82902788m","W94887529m","G89802501l","O69910794s","Q19809147d","J56064114c","R43235234s","K94700250w","N71544590k","A75184626w","R21604956g","I36305699j","H46056902x","A76244435i","O10299579p","I91156524q","G82538964o","G97458712c","L57694823n","F76840118s","K80884803r","O90581671b","G38070925j","Q29249313o","J56545689q","T42242251m","C61780124j","Y47423696q","X27680460s","Y54716288t","W59790924m","G81562649m","C63237728d","W99309019r","E27404802m","S49751791o","D81306259u","H97736690b","W47327018z","O96941420x","V52151407j","Q47446434j","O10667552b","G40392529f","A62567172n","W16570044j","P84345673d","E81348170i","L27266925o","O43035950r","B33846006p","X61261199r","B26972969f","O85677842g","I74858420h","I31030164y","X78589009e","E94006565f","R89845426m","S98911989u","P96683458i","O57845304x","Z48463075v","H25701772k","M77068538f","D97707773k","E37272536y","S32285968g","X23645330r","I86847250z","W50500249h","H92781402y","C89777084t","V50089390m","J49458798r","P38492150h","P29060906k","R96318412s","I54727415q","Q19898501v","Y41618628j","X86462573s","W74286670g","K17437337r","X97882607t","K48891316i","U23607700j","O47340043b","R29036029v","U72711811c","N55862894y","Z23693583k","C85244745q","A82165056l","Q44274461r","F62449928p","V92902376l","X35408965t","V32948734c","P17335215b","N91029236b","R60158279k","C55496993o","I76617924i","S31759755f","C53757465q","D85386471j","R85409418a","P89953277j","V89097958t","D33909314g","H57636831c","T57321134a","T32350572x","Y15969311a","G11570300o","M97640706s","S64614950v","Z61506311a","M53730810o","F85606586a","C73870888s","R99695424j","O61496107d","U70263326s","D54694522b","X52486989m","R42994258z","Q84972246e","D22126655l","J78229514y","G38469469q","M29197111s","L24828662u","N80588864k","R41308157f","Z54325525y","B18113532l","L62710784c","D99510269e","N23029791t","J82421944z","Z83417200k","K37622829q","C13134053e","O31088327w","Q39205016d","Q89539747z","I25012845o","P73852471u","R34265624t","A37454199a","N88403143f","E56458217m","V18373155m","N10218960v","V61308801x","C99312111j","D65055866w","S10285651l","A36565376x","K45860564g","P77345895d","X93562315m","X39487247h","E65640983v","H71423083u","E68747044l","K50385546q","R92229654u","D63892900j","H15473644c","H19474364m","Q89475690q","L19625677j","U95917209l","N41456167q","I78829726v","N95475685v","J46086871w","P81224759u","R76540155z","Q95176763o","V72612516a","I43930515o","V44495402u","O17662124z","D78375797n","I74524764j","Y17093890r","Y95779418s","X59897349d","H14084855n","V88885825n","K39414781t","V17551566h","M72100527e","C14355885d","J97426743j","K43099345m","F45641188w","E24915681r","Y59374244a","S82851063s","W93072882v","A29445238v","Z92328110z","K24617713a","M37193377f","A55759066j","C24011955i","F98128128p","R18980383c","K46857613y","C18158384k","G10394591j","Y13488724v","F86635956r","G45760380s","M57849004c","I72135915q","W77238463n","Q51173163u","Z86394123l","F53958372a","E41322139c","H10210520g","W99206054g","X87072594c","V16292685r","Z71808694n","L71470607x","S85117847z","A92930700d","N30872640r","Z72747626w","N24036355q","V22454779z","V77202129h","M63336972m","J25427050b","M72059399d","R30595406d","O34630819w","D99882823e","A58199282q","U85191499e","X48953467f","H99698196u","U92565174t","Z74612586s","D64944542n","A55233217n","B59846830m","D78947163d","S85362548b","M15449588k","A43396779u","S11996356f","W84927273r","B15345604n","B96640756o","E80753377t","A73453881p","Q64597452s","K41470070c","M23981619i","H68482750a","W88124253u","F14859838k","S95504705c","R38074907a","T36873183a","U65459151w","E86070356a","E69038473w","F69541473h","A38844999a","P31966907m","I46365981h","A11320411j","R91167497s","W98328590w","I88639085r","J12360708w","N74531055r","B28723740l","D73857218h","V37923546i","E21639258k","R97045758x","N10653625o","P27838269t","R69126579g","G70888105q","Z20748387z","T37370903k","X40335759y","U11367990x","E19579400k","N31263878l","C63605693t","L53909304w","Z64611136p","D51254892s","K15425362c","V69590205i","V42973399v","C30205120i","N74683327h","R43721375z","X79367371z","T48862334o","D56161636r","Y25724924x","E57244350y","B59851246h","N84807224d","V39943369p","G63955452e","G44193217o","G55490014b","O12022247u","K21197136e","I89427606l","C54453311e","Z86307452k","C72717779u","V48060722v","A59655820q","E42469971o","X88011967v","Y98828682c","T54950242b","B77091689i","P21652339c","K80692900s","X78250665a","K28343844t","M57207121h","Y20930168h","U67393985h","E15004290t","G26430521r","X51217167p","K78866374k","T56700713v","K89995535v","F17048265k","G84182257i","K41833331j","E93543688n","K32009370v","R58878081k","Q72092888a","S43967267g","M23603132x","I69417132z","V42769965r","E31174112u","U58080625g","V78606190k","M79292552s","E93644141m","I97199691i","R56652592c","H69896093r","N71087806r","M38949826z","Q67274170y","O52681511a","E19144124i","V64500522g","B38150051j","A40294398a","W24721182n","F18103065e","I76485674r","W88230284f","C32169558d","B19410632u","O40949658a","L61368584p","R13835848c","G96153760g","T89780065t","K51293422o","V88086651r","O44786015p","G20810581t","T77152470t","U35278896d","I85815941r","R30875949y","K40192386a","Y58542001l","U56107728s","M51229126r","F39365609j","X70563307p","U33019774n","C28830383u","C86436713z","U81833235u","W40961618k","W22393781w","U57259627i","I15767854m","F72605182u","J74658732g","E16994558f","Z76750818z","U44611961m","V22469087d","C75548955t","R42682091d","D18513559p","A82631579j","V30099148o","G74251571u","Z48227223a","X57455151c","F65371917d","S56795780n","E72266988n","V44571008s","L53035801f","Q73721330u","O51420981n","C48549233h","D94187788h","K83903910v","R76476438n","E96862503a","L93083359k","N59047709v","C42072800e","M50698420l","V58981514v","E80779125f","P23870466m","I80482311y","C53679426s","T94636650b","G73765649i","K19744425k","J78280289m","Q54567034t","B83989238i","Y55343712i","S77989526d","Y94107847m","S99278458z","J57974891r","D34349804q","M29176621a","S48749365w","Q57295546t","B35117867y","T39313930u","U80255652d","C41727323v","R97497884a","T51885647w","O43264779e","D92505838x","G16610178n","P83848983e","S50343573h","X59557887r","O88272442f","M44198988w","U35977768b","G11188704d","R98817648w","T65353824p","M73013329t","V46162276y","Z64179799n","E65146950j","I67431746u","F24441473r","C89976752n","C61359583p","F68087969y","I87670874f","X96379671e","W34825966j","J52367701e","U23059591y","I77548304g","T75924584w","G75786459z","Z45479594m","B17973184k","C31446586q","D16024790i","H33758293q","R54647425l","S31338476w","B54004550n","G95795529t","H84452761l","L75304030o","L67634230o","H37037762d","Y75786029c","P91740207b","W34684558z","Z22920367x","Y31084957k","F65791507v","R49473858l","I26230127y","N88791695p","Z63962156f","Z42653143q","F23653922e","M91350075c","K11820523g","D52977625h","N98543733r","R12769259v","R86266774g","D28343770d","V51396350b","Y36032000t","B96560142v","F64448476w","L34466307a","P12098707k","P60088378g","R63040812w","H33604951s","X24332080w","V56896061z","P45110082b","B95663841k","K41123173d","J75567242x","Z88905070r","F91442122n","J11619877n","R48867124l","O73659692m","Q84851868i","C37100707b","Y26586926p","V73682745j","H88422902q","K27227159n","L68313280r","Y40807161f","T47533703d","T94032926b","R67329768c","I28519374o","O78545830i","V62538623k","F48986188c","M22902431q","F87215009g","E63147506c","M36402119x","M74265304l","C55860097x","R72627820c","S86237034v","Y88863418o","T34451909c","M53072710a","T36947115w","X50948194c","B13733863g","L24944953n","T70619624w","G73633819c","I51529423y","Y14017204g","D23815825e","H76879400q","C71453792b","Q40897981x","D92927081m","F85670124r","E84220995f","E20866663h","P62207256u","R55465632c","F40132852y","O99872472m","A62673295q","W54282045y","E64252466s","H87545303e","H31114109c","J95606373h","N22901480s","O77430556t","J38769832t","G45099404q","U55752621c","R23627578p","Z84267082f","Q47706290e","Z37111508a","K78341348j","W95364472k","D15296815p","C85076844w","X34254017c","P56523753t"
 ];
 const codeSet = new Set(codeArr);
 
-// 打开抽奖弹窗
+// 弹窗事件
 openBtn.onclick = ()=>{
     lotInput.value = '';
     tipDom.style.display = 'none';
     prizeDom.style.display = 'none';
-    saveTip.style.display = 'none';
     extraCount = 0;
     lotMask.style.display = 'flex';
 };
-// 关闭抽奖弹窗
 closeBtn.onclick = ()=>{
     lotMask.style.display = 'none';
     extraCount = 0;
 };
-// 遮罩点击关闭
 lotMask.onclick = e=>{
     if(e.target === lotMask){
         lotMask.style.display = 'none';
@@ -744,34 +683,11 @@ lotMask.onclick = e=>{
     }
 };
 
-// 打开中奖记录弹窗
-openRecordBtn.onclick = ()=>{
-    let html = '';
-    if(prizeRecords.length === 0){
-        html = '<div class="empty-tip">暂无中奖记录</div>';
-    }else{
-        prizeRecords.forEach((item,idx)=>{
-            html += `<div class="record-item">${idx+1}. 抽奖码：${item.code}｜${item.date}｜奖品：${item.prize}</div>`;
-        });
-    }
-    recordBox.innerHTML = html;
-    recordMask.style.display = 'flex';
-};
-closeRecord.onclick = ()=>{
-    recordMask.style.display = 'none';
-};
-recordMask.onclick = e=>{
-    if(e.target === recordMask){
-        recordMask.style.display = 'none';
-    }
-};
-
-// 抽奖执行完整修复代码
+// 抽奖执行
 subBtn.onclick = ()=>{
     let code = lotInput.value.trim();
     tipDom.style.display = 'none';
     prizeDom.style.display = 'none';
-    saveTip.style.display = 'none';
     if(!code){
         tipDom.innerText = "请输入抽奖码";
         tipDom.style.display = 'block';
@@ -785,10 +701,8 @@ subBtn.onclick = ()=>{
     if(usedCodes.includes(code) && extraCount === 0){
         tipDom.innerText = "该码已抽过，无法重复使用";
         tipDom.style.display = 'block';
-        return;
+    return;
     }
-
-    // 随机抽取奖品
     let r = Math.floor(Math.random() * totalW);
     let res = "谢谢惠顾";
     let sum = 0;
@@ -796,4 +710,23 @@ subBtn.onclick = ()=>{
         sum += p.w;
         if(r < sum){
             res = p.name;
-            break
+            break;
+        }
+    }
+    if(res === "再来一次"){
+        extraCount++;
+        prizeDom.innerText = `抽到【再来一次】，当前额外次数：${extraCount}`;
+    }else{
+        if(extraCount === 0){
+            usedCodes.push(code);
+            localStorage.setItem('usedLot', JSON.stringify(usedCodes));
+        }else{
+            extraCount--;
+        }
+        prizeDom.innerText = `中奖：${res}`;
+    }
+    prizeDom.style.display = 'block';
+};
+</script>
+</body>
+</html>
