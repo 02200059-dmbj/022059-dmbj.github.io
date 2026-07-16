@@ -275,8 +275,8 @@
         .record-btn:hover{
             background:#3f6354;
         }
-        /* 抽奖弹窗遮罩 */
-        .lottery-mask, .record-mask{
+        /* 弹窗通用遮罩 */
+        .lottery-mask, .record-mask, .goods-mask, .tip-mask{
             position:fixed;
             top:0;
             left:0;
@@ -288,13 +288,13 @@
             align-items:center;
             justify-content:center;
         }
-        .lottery-dialog, .record-dialog{
+        .lottery-dialog, .record-dialog, .tip-dialog{
             background:#fff;
             width:440px;
             padding:30px;
             border-radius:12px;
         }
-        .lottery-dialog h3, .record-dialog h3{
+        .lottery-dialog h3, .record-dialog h3, .tip-dialog h3{
             color:#36574b;
             margin-bottom:20px;
             text-align:center;
@@ -366,19 +366,6 @@
             padding:20px 0;
         }
         /* 周边图片弹窗样式 */
-        .goods-mask{
-            position:fixed;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background:rgba(0,0,0.8);
-            z-index:1001;
-            display:none;
-            align-items:center;
-            justify-content:center;
-            padding:20px;
-        }
         .goods-box{
             max-width:900px;
             width:100%;
@@ -411,13 +398,44 @@
             border-radius:4px;
             cursor:pointer;
         }
+        /* 页面加载提示弹窗 */
+        .tip-dialog p{
+            font-size:17px;
+            line-height:1.8;
+            text-align:center;
+            color:#2c3833;
+            margin-bottom:25px;
+        }
+        .tip-close-btn{
+            display:block;
+            margin:0 auto;
+            padding:10px 36px;
+            border:none;
+            background:#42594f;
+            color:#fff;
+            border-radius:6px;
+            font-size:16px;
+            cursor:pointer;
+        }
+        .tip-close-btn:hover{
+            background:#36574b;
+        }
     </style>
 </head>
 <body>
+    <!-- 页面进入提示弹窗 加载提示 -->
+    <div class="tip-mask" id="tipMask" style="display:flex;">
+        <div class="tip-dialog">
+            <h3>温馨提示</h3>
+            <p>如果部分页面显示空白，请耐心等待加载片刻，并非出现bug，只是图片资源加载速度较慢～</p>
+            <button class="tip-close-btn" onclick="closeTipModal()">我知道啦</button>
+        </div>
+    </div>
+
     <!-- 首页横幅 -->
     <header>
         <h1 class="header-title">喜来眠官网</h1>
-        <p class="header-sub">雨村小院 · 三人三餐四季</p>
+        <p class="header-sub">雨村小镇 · 三人三餐四季</p>
         <a href="#main" class="jump-btn">进入山居</a>
     </header>
     <!-- 导航栏 -->
@@ -681,6 +699,17 @@
         <p style="margin-top:10px">青山不改，绿水长流</p>
     </footer>
 <script>
+// 页面加载提示弹窗控制
+const tipMask = document.getElementById('tipMask');
+function closeTipModal(){
+    tipMask.style.display = 'none';
+}
+tipMask.addEventListener('click', e=>{
+    if(e.target === tipMask){
+        closeTipModal();
+    }
+})
+
 // 轮播自动切换
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slider-img');
@@ -694,7 +723,7 @@ function changeSlide(index) {
 }
 setInterval(() => {
     let next = (currentSlide + 1) % slides.length;
-    changeSlide(next);
+    change(next);
 }, 5000);
 // 菜品弹窗
 function openFoodModal(title, img, desc) {
