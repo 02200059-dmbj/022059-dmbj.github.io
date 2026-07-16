@@ -261,7 +261,7 @@
             margin-bottom:12px;
         }
         .draw-main-btn:hover{
-            background:#b6600;
+            background:#b660;
         }
         .record-btn{
             background:#507c68;
@@ -364,6 +364,52 @@
             text-align:center;
             color:#777;
             padding:20px 0;
+        }
+        /* 周边图片弹窗样式 */
+        .goods-mask{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0.8);
+            z-index:1001;
+            display:none;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+        }
+        .goods-box{
+            max-width:900px;
+            width:100%;
+        }
+        .goods-img{
+            width:100%;
+            display:block;
+            border-radius:8px;
+        }
+        .goods-close{
+            margin-top:15px;
+            width:100%;
+            padding:12px;
+            border:none;
+            background:#6a9987;
+            color:#fff;
+            font-size:16px;
+            border-radius:6px;
+            cursor:pointer;
+        }
+        .goods-close:hover{
+            background:#42594f;
+        }
+        .look-btn{
+            background:#6a9987;
+            color:#fff;
+            border:none;
+            padding:4px 12px;
+            margin-left:12px;
+            border-radius:4px;
+            cursor:pointer;
         }
     </style>
 </head>
@@ -543,6 +589,7 @@
             <li>8月17稻米节专场，发放明信片周边</li>
             <li>四季采茶、溪游、围炉打卡活动</li>
             <li>消费满817赠送稻米节伴手礼</li>
+            <li>吴山居伴手礼周边售卖 <button class="look-btn" onclick="openGoodsModal()">点击查看</button></li>
             <li>集章卡集齐兑换限定周边</li>
             <li>留言墙记录雨村故事</li>
             <li>线下稻米交流会定期举办</li>
@@ -559,6 +606,13 @@
             <button class="record-btn" id="openRecordBtn">我的中奖记录</button>
         </div>
     </section>
+    <!-- 周边图片弹窗 -->
+    <div class="goods-mask" id="goodsMask">
+        <div class="goods-box">
+            <img class="goods-img" src="pintuan.jpg" alt="吴山居伴手礼周边">
+            <button class="goods-close" onclick="closeGoodsModal()">关闭图片</button>
+        </div>
+    </div>
     <!-- 抽奖弹窗 -->
     <div class="lottery-mask" id="lotMask">
         <div class="lottery-dialog">
@@ -657,7 +711,20 @@ document.getElementById('foodModal').addEventListener('click', e => {
         closeFoodModal();
     }
 });
-// 留言提交（修改：读取自定义昵称，删除随机昵称）
+// 周边图片弹窗函数
+const goodsMask = document.getElementById('goodsMask');
+function openGoodsModal(){
+    goodsMask.style.display = 'flex';
+}
+function closeGoodsModal(){
+    goodsMask.style.display = 'none';
+}
+goodsMask.addEventListener('click', e=>{
+    if(e.target === goodsMask){
+        closeGoodsModal();
+    }
+})
+// 留言提交（自定义昵称，无随机名称）
 function addMsg() {
     const nameEl = document.getElementById('msgNameInput');
     const inputEl = document.getElementById('msgInput');
@@ -801,7 +868,7 @@ const codeArr = [
          recordMask.style.display = 'none';
      }
  };
- // 抽奖执行完整闭环
+ // 抽奖执行完整闭环（修复重复抽奖bug，一个码仅能抽一次）
  subBtn.onclick = () => {
      let code = lotInput.value.trim();
      tipDom.style.display = 'none';
@@ -817,7 +884,8 @@ const codeArr = [
          tipDom.style.display = 'block';
          return;
      }
-     if (usedCodes.includes(code) && extraCount === 0) {
+     // 修复：只要码已使用，直接拦截，无视再来一次次数
+     if (usedCodes.includes(code)) {
          tipDom.innerText = '该码已抽过，无法重复使用';
          tipDom.style.display = 'block';
          return;
@@ -844,18 +912,16 @@ const codeArr = [
      // 存入中奖记录
      prizeRecords.push({ code: code, date: dateStr, prize: res });
      localStorage.setItem('prizeRecords', JSON.stringify(prizeRecords));
-     // 非再来一次才标记已使用
-     if (res !== '再来一次') {
-         if (!usedCodes.includes(code)) {
-             usedCodes.push(code);
-             localStorage.setItem('usedLot', JSON.stringify(usedCodes));
-         }
-         // 实物奖品提示兑换
-         if (res !== '谢谢惠顾') {
-             saveTip.style.display = 'block';
-         }
+     // 修复：无论中什么奖品，直接标记该抽奖码已使用，永久禁止重复提交
+     if (!usedCodes.includes(code)) {
+         usedCodes.push(code);
+         localStorage.setItem('usedLot', JSON.stringify(usedCodes));
      }
-     // 再来一次允许继续抽
+     // 实物奖品提示兑换
+     if (res !== '谢谢惠顾') {
+         saveTip.style.display = 'block';
+     }
+     // 再来一次仅当前弹窗内临时生效，关闭弹窗清空次数
      if (res === '再来一次') {
          extraCount += 1;
          tipDom.innerText = '获得再来一次！可继续抽奖一次。';
