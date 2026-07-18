@@ -261,7 +261,7 @@
             margin-bottom:12px;
         }
         .draw-main-btn:hover{
-            background:#b660;
+            background:#b66040;
         }
         .record-btn{
             background:#507c68;
@@ -438,11 +438,11 @@
         <p class="header-sub">雨村小镇 · 三人三餐四季</p>
         <a href="#main" class="jump-btn">进入山居</a>
     </header>
-    <!-- 导航栏 -->
+    <!-- 导航栏 修改：山居三人 → 人员介绍 -->
     <nav id="main">
         <div class="nav-wrap">
             <a href="#about">农家乐简介</a>
-            <a href="#character">山居三人</a>
+            <a href="#character">人员介绍</a>
             <a href="#book">线上预定</a>
             <a href="#food">家常菜单</a>
             <a href="#activity">稻米活动</a>
@@ -475,10 +475,11 @@
             </div>
         </div>
     </section>
-    <!-- 山居三人 -->
+    <!-- 人员介绍板块 修改标题+新增小花/黑瞎子/霍秀秀 -->
     <section id="character" style="background:#edf3f0">
-        <h2 class="sec-title">山居常住三人</h2>
+        <h2 class="sec-title">小院常驻三人，随机到访人员</h2>
         <div class="char-box">
+            <!-- 常驻三人 -->
             <div class="char-card">
                 <img src="wuxie.jpg" alt="吴邪">
                 <h3>吴邪</h3>
@@ -493,6 +494,22 @@
                 <img src="pangzi.jpg" alt="王胖子">
                 <h3>王胖子</h3>
                 <p>农家乐大厨，厨艺一绝，幽默热闹，撑起喜来大半烟火气。</p>
+            </div>
+            <!-- 随机到访角色 -->
+            <div class="char-card">
+                <img src="xiaohua.jpg" alt="解雨臣（小花）">
+                <h3>解雨臣</h3>
+                <p>时常抽空来雨村小住，带各色新奇点心，温柔细腻，精通各类手艺。</p>
+            </div>
+            <div class="char-card">
+                <img src="hexiazi.jpg" alt="黑瞎子">
+                <h3>黑瞎子</h3>
+                <p>偶尔登门蹭饭，爱逗趣开玩笑，随身总带着零食与新奇小玩意儿。</p>
+            </div>
+            <div class="char-card">
+                <img src="huoxiaoxiu.jpg" alt="霍秀秀">
+                <h3>霍秀秀</h3>
+                <p>闲来会来小院串门，活泼灵动，总带着城里的新鲜趣事分享给大家。</p>
             </div>
         </div>
     </section>
@@ -710,7 +727,7 @@ tipMask.addEventListener('click', e=>{
     }
 })
 
-// 轮播自动切换
+// 【修复轮播失效】修正函数名错误
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slider-img');
 const dots = document.querySelectorAll('.dot');
@@ -721,10 +738,12 @@ function changeSlide(index) {
     slides[currentSlide].classList.add('active');
     dots[currentSlide].classList.add('active');
 }
+// 自动轮播定时器
 setInterval(() => {
     let next = (currentSlide + 1) % slides.length;
-    change(next);
+    changeSlide(next);
 }, 5000);
+
 // 菜品弹窗
 function openFoodModal(title, img, desc) {
     document.getElementById('modalTitle').innerText = title;
@@ -935,28 +954,3 @@ const codeArr = [
      // 生成日期
      let now = new Date();
      let year = now.getFullYear();
-     let month = String(now.getMonth() + 1).padStart(2, '0');
-     let day = String(now.getDate()).padStart(2, '0');
-     let dateStr = `${year}.${month}.${day}`;
-     // 存入中奖记录
-     prizeRecords.push({ code: code, date: dateStr, prize: res });
-     localStorage.setItem('prizeRecords', JSON.stringify(prizeRecords));
-     // 修复：无论中什么奖品，直接标记该抽奖码已使用，永久禁止重复提交
-     if (!usedCodes.includes(code)) {
-         usedCodes.push(code);
-         localStorage.setItem('usedLot', JSON.stringify(usedCodes));
-     }
-     // 实物奖品提示兑换
-     if (res !== '谢谢惠顾') {
-         saveTip.style.display = 'block';
-     }
-     // 再来一次仅当前弹窗内临时生效，关闭弹窗清空次数
-     if (res === '再来一次') {
-         extraCount += 1;
-         tipDom.innerText = '获得再来一次！可继续抽奖一次。';
-         tipDom.style.display = 'block';
-     }
- };
- </script>
-</body>
-</html>
