@@ -160,6 +160,12 @@
             cursor:pointer;
         }
         /* 人物板块 */
+        .char-subtitle{
+            text-align:center;
+            font-size:24px;
+            color:#42594f;
+            margin:50px 0 25px;
+        }
         .char-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;text-align:center}
         .char-card img{
             width:180px;height:180px;object-fit:cover;border-radius:50%;margin-bottom:16px
@@ -475,11 +481,13 @@
             </div>
         </div>
     </section>
-    <!-- 人员介绍板块 修改标题+新增小花/黑瞎子/霍秀秀 -->
+    <!-- 人员介绍板块 已拆分结构 -->
     <section id="character" style="background:#edf3f0">
-        <h2 class="sec-title">小院常驻三人，随机到访人员</h2>
+        <h2 class="sec-title">小院人物介绍</h2>
+
+        <h3 class="char-subtitle">小院常驻三人 · 铁三角</h3>
         <div class="char-box">
-            <!-- 常驻三人 -->
+            <!-- 常驻三人铁三角 -->
             <div class="char-card">
                 <img src="wuxie.jpg" alt="吴邪">
                 <h3>吴邪</h3>
@@ -495,6 +503,10 @@
                 <h3>王胖子</h3>
                 <p>农家乐大厨，厨艺一绝，幽默热闹，撑起喜来大半烟火气。</p>
             </div>
+        </div>
+
+        <h3 class="char-subtitle">随机到访人员</h3>
+        <div class="char-box">
             <!-- 随机到访角色 -->
             <div class="char-card">
                 <img src="xiaohua.jpg" alt="解雨臣（小花）">
@@ -954,19 +966,4 @@ subBtn.onclick = () => {
     prizeDom.innerText = `中奖：${res}`;
     prizeDom.style.display = 'block';
     saveTip.style.display = 'block';
-    // 标记该抽奖码已使用
-    usedCodes.push(code);
-    localStorage.setItem('usedLot', JSON.stringify(usedCodes));
-    // 保存中奖记录
-    let now = new Date();
-    let dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-    prizeRecords.push({
-        code: code,
-        date: dateStr,
-        prize: res
-    });
-    localStorage.setItem('prizeRecords', JSON.stringify(prizeRecords));
-}
-</script>
-</body>
-</html>
+    //
