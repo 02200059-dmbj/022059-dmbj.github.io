@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- 修复：增加 viewport-fit=cover 适配刘海全面屏 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>喜来眠官网</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:"思源宋体",serif;}
@@ -10,14 +11,20 @@
         body{background:#f6f9f7;color:#2c3833;line-height:1.7;width:100%;overflow-x:hidden;}
         header{
             background:linear-gradient(rgba(0,30,20,0.6),rgba(0,30,20,0.6)),url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') center/cover no-repeat;
-            color:#fff;
+            /* 核心修复：使用dvh动态视口高度，兼容移动端地址栏 */
+            min-height: 100dvh;
+            height: 100vh;
+            width:100%;
+            background-size: cover;
             display:flex;
             flex-direction:column;
             align-items:center;
             justify-content:center;
             text-align:center;
             padding:20px;
-            width:100%;
+            /* 适配iOS安全区，防止内容被刘海遮挡 */
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
         }
         .header-title{font-size:48px;margin-bottom:12px;letter-spacing:8px}
         .header-sub{font-size:18px;opacity:0.9;margin-bottom:30px}
@@ -445,6 +452,8 @@
             font-size:20px;
             z-index:98;
             transition:0.3s;
+            /* 避开底部手势条 */
+            bottom: calc(30px + env(safe-area-inset-bottom));
         }
         .back-top:hover{
             background:#6a9987;
@@ -905,12 +914,7 @@ const codeArr = [
 "B41753082f", "U69208417z", "L17539260d", "N93841507w", "E56182743h",
 "A30975184j", "V78460392q", "P24135978t", "C87092641x", "R43617025l",
 "O61958307a", "G12846759u", "I95073418o", "F58321690i", "Y34709251e",
-"S71584036g", "D26913587m", "H82470193r", "W49106825b", "J65732901z",
-"K42091736p", "T91650732k", "Q53087149c", "M37241860v", "X75819024n",
-"B21364795y", "U84905217f", "L40572381d", "N68193452w", "E13758096h",
-"A97426105j", "V51290738q", "P35814926t", "C79062513x", "R28541370l",
-"O80137649a", "G45289163u", "I62975084o", "F16304297i", "Y94718520e",
-"S57023914g", "D31697408m", "H73450862r", "W23816045b", "J88624157z",
+"S71584036g", "D26913587m", "H82470193r", "W23816045b", "J88624157z",
 "K42091736p", "T66587319k", "Q10935482c", "M92140675v", "X54768201n",
 "B39502741y", "U77139528f", "L25074169d", "N83415902w", "E48607253h",
 "A60329178j", "V14593827q", "P98251463t", "C50876312x", "R33142590l",
