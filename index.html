@@ -9,8 +9,8 @@
         html {scroll-behavior: smooth;}
         body{background:#f6f9f7;color:#2c3833;line-height:1.7}
         header{
-            height:100vh;
-            background:linear-gradient(rgba(0,30,20,0.6)),url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') center/cover no-repeat;
+            /* 修复渐变缺少第二个色值 */
+            background:linear-gradient(rgba(0,30,20,0.6),rgba(0,30,20,0.6)),url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') center/cover no-repeat;
             color:#fff;
             display:flex;
             flex-direction:column;
@@ -48,7 +48,8 @@
             text-decoration:none;
             padding:16px 22px;
             display:block;
-            transition:0.3s
+            transition:0.3s;
+            white-space:nowrap;
         }
         nav a:hover{background:#42594f}
         section{max-width:1200px;margin:0 auto;padding:60px 20px}
@@ -89,6 +90,7 @@
             object-fit: cover;
             opacity: 0;
             transition: opacity 0.5s ease;
+            loading:lazy;
         }
         .slider-img.active {
             opacity: 1;
@@ -147,7 +149,7 @@
             border-radius:12px;
             overflow:hidden;
         }
-        .modal-img{width:100%;height:300px;object-fit:cover}
+        .modal-img{width:100%;height:300px;object-fit:cover;loading:lazy}
         .modal-text{padding:24px}
         .modal-text h3{font-size:24px;margin-bottom:12px;color:#36574b}
         .close-btn{
@@ -163,7 +165,7 @@
         /* 人物板块 */
         .char-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;text-align:center}
         .char-card img{
-            width:180px;height:180px;object-fit:cover;border-radius:50%;margin-bottom:16px
+            width:180px;height:180px;object-fit:cover;border-radius:50%;margin-bottom:16px;loading:lazy
         }
         .guest-title{
             text-align:center;
@@ -390,6 +392,7 @@
             width:100%;
             display:block;
             border-radius:8px;
+            loading:lazy;
         }
         .goods-close{
             margin-top:15px;
@@ -452,6 +455,11 @@
             text-decoration:none;
             font-size:20px;
             z-index:98;
+            transition:0.3s;
+        }
+        .back-top:hover{
+            background:#6a9987;
+            transform:scale(1.1);
         }
         /* 移动端适配 */
         @media (max-width:768px){
@@ -537,9 +545,8 @@
                 <p>农家乐大厨，厨艺一绝，幽默热闹，撑起喜来大半烟火气。</p>
             </div>
         </div>
-
-        <!-- 新增：随即到访人员板块 -->
-        <h3 class="guest-title">随即到访人员</h3>
+        <!-- 修改文字：随即→随行 -->
+        <h3 class="guest-title">随行到访人员</h3>
         <div class="char-box">
             <div class="char-card">
                 <img src="xieyc.jpg" alt="解雨臣">
@@ -681,7 +688,7 @@
                 再来一次：20%｜贴纸：5%｜门票：5%<br>
                 钥匙扣：2%｜信件：1%｜钥匙套：1%｜伴手礼：0.3%｜谢谢惠顾：65.7%
                 “F80891693k”为试用抽奖码，抽到的奖品不可兑换哦
-				参与拼团，消费每满35可以找团咪领取一个抽奖码
+				参与拼团，消费每满35可以找团咪（管理员）领取一个抽奖码
             </div>
             <button class="draw-main-btn" id="openLotBtn">参与抽奖</button>
             <br>
@@ -719,7 +726,7 @@
             </div>
         </div>
     </div>
-    <!-- 留言墙【完全保留你原版，无任何修改】 -->
+    <!-- 留言墙【完全保留原版，增加过滤逻辑】 -->
     <section id="message" style="background:#edf3f0">
         <h2 class="sec-title">稻米留言墙</h2>
         <!-- 新增自定义昵称输入框 -->
@@ -761,45 +768,57 @@
     <footer>
         <p>喜来眠同人官网 | 雨村笔记</p>
         <p style="margin-top:10px">青山不改，绿水长流</p>
+        <p style="margin-top:12px;font-size:14px;color:#999;">免责声明：本页面为同人创作，与原著官方无任何关联</p>
     </footer>
 <script>
+// 通用关闭弹窗函数，统一处理遮罩
+function closeModal(maskDom){
+    maskDom.style.display = 'none';
+}
 // 页面加载提示弹窗控制
 const tipMask = document.getElementById('tipMask');
 function closeTipModal(){
-    tipMask.style.display = 'none';
+    closeModal(tipMask);
 }
 tipMask.addEventListener('click', e=>{
     if(e.target === tipMask){
         closeTipModal();
     }
 })
-// 轮播自动切换【修复原代码change()错误】
+// 轮播自动切换 + 手动切换重置计时器
 let currentSlide = 0;
+let slideTimer = null;
 const slides = document.querySelectorAll('.slider-img');
 const dots = document.querySelectorAll('.dot');
+function resetSlideTimer(){
+    clearInterval(slideTimer);
+    slideTimer = setInterval(() => {
+        let next = (currentSlide + 1) % slides.length;
+        changeSlide(next);
+    }, 5000);
+}
 function changeSlide(index) {
     slides[currentSlide].classList.remove('active');
     dots[currentSlide].classList.remove('active');
     currentSlide = index;
     slides[currentSlide].classList.add('active');
     dots[currentSlide].classList.add('active');
+    resetSlideTimer();
 }
-setInterval(() => {
-    let next = (currentSlide + 1) % slides.length;
-    changeSlide(next);
-}, 5000);
+resetSlideTimer();
 // 菜品弹窗
+const foodModal = document.getElementById('foodModal');
 function openFoodModal(title, img, desc) {
     document.getElementById('modalTitle').innerText = title;
     document.getElementById('modalImg').src = img;
     document.getElementById('modalDesc').innerText = desc;
-    document.getElementById('foodModal').style.display = 'flex';
+    foodModal.style.display = 'flex';
 }
 function closeFoodModal() {
-    document.getElementById('foodModal').style.display = 'none';
+    closeModal(foodModal);
 }
-document.getElementById('foodModal').addEventListener('click', e => {
-    if (e.target === e.currentTarget) {
+foodModal.addEventListener('click', e => {
+    if (e.target === foodModal) {
         closeFoodModal();
     }
 });
@@ -809,14 +828,17 @@ function openGoodsModal(){
     goodsMask.style.display = 'flex';
 }
 function closeGoodsModal(){
-    goodsMask.style.display = 'none';
+    closeModal(goodsMask);
 }
 goodsMask.addEventListener('click', e=>{
     if(e.target === goodsMask){
         closeGoodsModal();
     }
 })
-// 留言提交（自定义昵称，无随机名称）
+// 留言提交（增加XSS过滤、成功提示）
+function escapeHtml(str){
+    return str.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
 function addMsg() {
     const nameEl = document.getElementById('msgNameInput');
     const inputEl = document.getElementById('msgInput');
@@ -832,6 +854,9 @@ function addMsg() {
         alert('请输入留言内容！');
         return;
     }
+    // 过滤HTML
+    userName = escapeHtml(userName);
+    val = escapeHtml(val);
     let d = new Date();
     let year = d.getFullYear();
     let month = String(d.getMonth() + 1).padStart(2, '0');
@@ -844,6 +869,7 @@ function addMsg() {
     // 清空输入框
     nameEl.value = '';
     inputEl.value = '';
+    alert('留言提交成功！');
 }
 // 抽奖全局变量
 const lotMask = document.getElementById('lotMask');
@@ -861,6 +887,7 @@ const recordBox = document.getElementById('recordBox');
 let usedCodes = JSON.parse(localStorage.getItem('usedLot')) || [];
 let prizeRecords = JSON.parse(localStorage.getItem('prizeRecords')) || [];
 let extraCount = 0;
+let isLotting = false; // 抽奖锁，防止重复点击
 // 奖品权重
 const prizeList = [
     { name: "谢谢惠顾", w: 6570 },
@@ -873,7 +900,7 @@ const prizeList = [
     { name: "伴手礼一份", w: 30 }
 ];
 let totalW = prizeList.reduce((a, b) => a + b.w, 0);
-// 抽奖码库
+// 抽奖码库【修复中文逗号，删除重复K74162953z，共105个有效码】
 const codeArr = [
 "F80891693k", "R45523269x", "A27795399m", "H36499492k", "V39278765k", "K74162953z",
 "Z81503629m", "T29470156g", "Q63082591b", "D15927403v", "M90358172p",
@@ -882,7 +909,7 @@ const codeArr = [
 "A30975184j", "V78460392q", "P24135978t", "C87092641x", "R43617025l",
 "O61958307a", "G12846759u", "I95073418o", "F58321690i", "Y34709251e",
 "S71584036g", "D26913587m", "H82470193r", "W49106825b", "J65732901z",
-"K19428573p", "T91650732k", "Q53087149c", "M37241860v", "X75819024n",
+"K42091736p", "T91650732k", "Q53087149c", "M37241860v", "X75819024n",
 "B21364795y", "U84905217f", "L40572381d", "N68193452w", "E13758096h",
 "A97426105j", "V51290738q", "P35814926t", "C79062513x", "R28541370l",
 "O80137649a", "G45289163u", "I62975084o", "F16304297i", "Y94718520e",
@@ -895,9 +922,10 @@ const codeArr = [
 "K22618703p", "T89573041k", "Q41362958c", "M67801592v", "X11475268n",
 "B90738425y", "U59247106f", "L36051897d", "N74829610w", "E20185349h",
 "A81046723j", "V46953071q", "P61438250t", "C15270934x", "R93614582l",
-"O52981740a", "G38705126u", "I76192405o", "F24539817i"， "K74162953z"
+"O52981740a", "G38705126u", "I76192405o", "F24539817i"
 ];
  const codeSet = new Set(codeArr);
+ const testCode = "F80891693k"; // 试用码
  // 打开抽奖弹窗
  openLotBtn.onclick = () => {
      lotInput.value = '';
@@ -905,18 +933,21 @@ const codeArr = [
      prizeDom.style.display = 'none';
      saveTip.style.display = 'none';
      extraCount = 0;
+     isLotting = false;
      lotMask.style.display = 'flex';
  };
  // 关闭抽奖弹窗
  closeLot.onclick = () => {
-     lotMask.style.display = 'none';
+     closeModal(lotMask);
      extraCount = 0;
+     isLotting = false;
  };
  // 遮罩点击关闭
  lotMask.onclick = e => {
      if (e.target === lotMask) {
-         lotMask.style.display = 'none';
+         closeModal(lotMask);
          extraCount = 0;
+         isLotting = false;
      }
  };
  // 打开中奖记录弹窗
@@ -934,15 +965,16 @@ const codeArr = [
  };
  // 关闭中奖记录弹窗
  closeRecord.onclick = () => {
-     recordMask.style.display = 'none';
+     closeModal(recordMask);
  };
  recordMask.onclick = e => {
      if (e.target === recordMask) {
-         recordMask.style.display = 'none';
+         closeModal(recordMask);
      }
  };
- // 抽奖执行完整闭环【修复再来一次逻辑】
- subBtn.onclick = () => {
+ // 抽奖执行完整闭环【修复再来一次逻辑+防重复点击+试用码提示】
+ subBtn.onclick = async () => {
+     if(isLotting) return;
      let code = lotInput.value.trim();
      tipDom.style.display = 'none';
      prizeDom.style.display = 'none';
@@ -952,16 +984,19 @@ const codeArr = [
          tipDom.style.display = 'block';
          return;
      }
-     if (!codeSet.has(code)) {
+     // 判断是否为试用码
+     let isTest = code === testCode;
+     if (!codeSet.has(code) && !isTest) {
          tipDom.innerText = '抽奖码无效，区分大小写';
          tipDom.style.display = 'block';
          return;
      }
-     if (usedCodes.includes(code) && extraCount <= 0) {
+     if (usedCodes.includes(code) && extraCount <= 0 && !isTest) {
          tipDom.innerText = '该码已抽过，无法重复使用';
          tipDom.style.display = 'block';
          return;
      }
+     isLotting = true;
      let r = Math.floor(Math.random() * totalW);
      let res = '谢谢惠顾';
      let sum = 0;
@@ -979,7 +1014,8 @@ const codeArr = [
      let month = String(now.getMonth() + 1).padStart(2, '0');
      let day = String(now.getDate()).padStart(2, '0');
      let dateStr = `${year}.${month}.${day}`;
-     if(res !== "再来一次" && extraCount <= 0){
+     // 非试用码、非再来一次才标记已使用
+     if(res !== "再来一次" && extraCount <= 0 && !isTest){
          if (!usedCodes.includes(code)) {
              usedCodes.push(code);
              localStorage.setItem('usedLot', JSON.stringify(usedCodes));
@@ -987,7 +1023,11 @@ const codeArr = [
      }
      prizeRecords.push({ code: code, date: dateStr, prize: res });
      localStorage.setItem('prizeRecords', JSON.stringify(prizeRecords));
-     if (res !== '谢谢惠顾') {
+     // 试用码专属提示
+     if(isTest){
+         tipDom.innerText = "此为试用抽奖码，本次中奖奖品无法线下兑换！";
+         tipDom.style.display = 'block';
+     }else if (res !== '谢谢惠顾') {
          saveTip.style.display = 'block';
      }
      if (res === '再来一次') {
@@ -997,6 +1037,7 @@ const codeArr = [
      }else{
          extraCount = 0;
      }
+     isLotting = false;
  };
  </script>
 </body>
