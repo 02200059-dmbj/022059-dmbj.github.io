@@ -6,6 +6,7 @@
     <title>喜来眠官网</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:"思源宋体",serif;}
+        html {scroll-behavior: smooth;}
         body{background:#f6f9f7;color:#2c3833;line-height:1.7}
         header{
             height:100vh;
@@ -164,6 +165,21 @@
         .char-card img{
             width:180px;height:180px;object-fit:cover;border-radius:50%;margin-bottom:16px
         }
+        .guest-title{
+            text-align:center;
+            font-size:26px;
+            margin:50px 0 30px;
+            color:#36574b;
+            position:relative
+        }
+        .guest-title::after{
+            content:"";
+            width:60px;
+            height:2px;
+            background:#6a9987;
+            display:block;
+            margin:10px auto
+        }
         /* 预定板块 */
         .book-box{
             background:#edf3f0;
@@ -261,7 +277,7 @@
             margin-bottom:12px;
         }
         .draw-main-btn:hover{
-            background:#b660;
+            background:#b66000;
         }
         .record-btn{
             background:#507c68;
@@ -420,9 +436,36 @@
         .tip-close-btn:hover{
             background:#36574b;
         }
+        /* 回到顶部按钮 */
+        .back-top{
+            position:fixed;
+            bottom:30px;
+            right:30px;
+            width:48px;
+            height:48px;
+            background:#42594f;
+            color:#fff;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-decoration:none;
+            font-size:20px;
+            z-index:98;
+        }
+        /* 移动端适配 */
+        @media (max-width:768px){
+            .about-box{grid-template-columns:1fr;}
+            .header-title{font-size:32px;letter-spacing:4px;}
+            .sec-title{font-size:26px;}
+            .guest-title{font-size:22px;}
+            nav a{padding:12px 14px;font-size:14px;}
+        }
     </style>
 </head>
 <body>
+    <!-- 回到顶部 -->
+    <a href="#" class="back-top">↑</a>
     <!-- 页面进入提示弹窗 加载提示 -->
     <div class="tip-mask" id="tipMask" style="display:flex;">
         <div class="tip-dialog">
@@ -431,7 +474,6 @@
             <button class="tip-close-btn" onclick="closeTipModal()">我知道啦</button>
         </div>
     </div>
-
     <!-- 首页横幅 -->
     <header>
         <h1 class="header-title">喜来眠官网</h1>
@@ -493,6 +535,26 @@
                 <img src="pangzi.jpg" alt="王胖子">
                 <h3>王胖子</h3>
                 <p>农家乐大厨，厨艺一绝，幽默热闹，撑起喜来大半烟火气。</p>
+            </div>
+        </div>
+
+        <!-- 新增：随即到访人员板块 -->
+        <h3 class="guest-title">随即到访人员</h3>
+        <div class="char-box">
+            <div class="char-card">
+                <img src="xieyc.jpg" alt="解雨臣">
+                <h3>解雨臣</h3>
+                <p>时常抽空前来雨村小住，擅长打理花草，偶尔下厨帮忙，待人温柔细致。</p>
+            </div>
+            <div class="char-card">
+                <img src="heixiazi.jpg" alt="黑瞎子">
+                <h3>黑瞎子</h3>
+                <p>随小花一同到访，爱开玩笑，最爱胖子做的下酒菜，闲时进山散步。</p>
+            </div>
+            <div class="char-card">
+                <img src="huoxiuxiu.jpg" alt="霍秀秀">
+                <h3>霍秀秀</h3>
+                <p>活泼灵动，每次来都会带各式小零食，喜欢在小院拍照、陪大家闲谈。</p>
             </div>
         </div>
     </section>
@@ -618,7 +680,7 @@
             <div class="rate-text">
                 再来一次：20%｜贴纸：5%｜门票：5%<br>
                 钥匙扣：2%｜信件：1%｜钥匙套：1%｜伴手礼：0.3%｜谢谢惠顾：65.7%
-                 可用“F80891693k” 体验抽奖一次
+                 可用“F80891693k”
             </div>
             <button class="draw-main-btn" id="openLotBtn">参与抽奖</button>
             <br>
@@ -636,7 +698,7 @@
     <div class="lottery-mask" id="lotMask">
         <div class="lottery-dialog">
             <h3>输入专属抽奖码</h3>
-            <input id="lotCodeInput" placeholder="区分大小写">
+            <input id="lotCodeInput" placeholder="区分大小写" onkeydown="if(event.key==='Enter')subBtn.click()">
             <div class="tip-text" id="tipDom"></div>
             <div class="prize-show" id="prizeDom"></div>
             <div class="tip-save" id="saveTip">记得截图保存页面，找团咪兑换奖品</div>
@@ -656,7 +718,7 @@
             </div>
         </div>
     </div>
-    <!-- 留言墙 -->
+    <!-- 留言墙【完全保留你原版，无任何修改】 -->
     <section id="message" style="background:#edf3f0">
         <h2 class="sec-title">稻米留言墙</h2>
         <!-- 新增自定义昵称输入框 -->
@@ -710,8 +772,7 @@ tipMask.addEventListener('click', e=>{
         closeTipModal();
     }
 })
-
-// 轮播自动切换
+// 轮播自动切换【修复原代码change()错误】
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slider-img');
 const dots = document.querySelectorAll('.dot');
@@ -724,7 +785,7 @@ function changeSlide(index) {
 }
 setInterval(() => {
     let next = (currentSlide + 1) % slides.length;
-    change(next);
+    changeSlide(next);
 }, 5000);
 // 菜品弹窗
 function openFoodModal(title, img, desc) {
@@ -807,7 +868,7 @@ const prizeList = [
     { name: "参观门票一张", w: 500 },
     { name: "钥匙扣一个", w: 200 },
     { name: "信件一封", w: 100 },
-    { name: "钥匙扣一套", w: 100 },
+    { name: "钥匙套一个", w: 100 },
     { name: "伴手礼一份", w: 30 }
 ];
 let totalW = prizeList.reduce((a, b) => a + b.w, 0);
@@ -898,7 +959,7 @@ const codeArr = [
          recordMask.style.display = 'none';
      }
  };
- // 抽奖执行完整闭环（修复重复抽奖bug，一个码仅能抽一次）
+ // 抽奖执行完整闭环【修复再来一次逻辑】
  subBtn.onclick = () => {
      let code = lotInput.value.trim();
      tipDom.style.display = 'none';
@@ -914,13 +975,11 @@ const codeArr = [
          tipDom.style.display = 'block';
          return;
      }
-     // 修复：只要码已使用，直接拦截，无视再来一次次数
-     if (usedCodes.includes(code)) {
+     if (usedCodes.includes(code) && extraCount <= 0) {
          tipDom.innerText = '该码已抽过，无法重复使用';
          tipDom.style.display = 'block';
          return;
      }
-     // 随机抽取奖品
      let r = Math.floor(Math.random() * totalW);
      let res = '谢谢惠顾';
      let sum = 0;
@@ -933,29 +992,28 @@ const codeArr = [
      }
      prizeDom.innerText = `中奖：${res}`;
      prizeDom.style.display = 'block';
-     // 生成日期
      let now = new Date();
      let year = now.getFullYear();
      let month = String(now.getMonth() + 1).padStart(2, '0');
      let day = String(now.getDate()).padStart(2, '0');
      let dateStr = `${year}.${month}.${day}`;
-     // 存入中奖记录
+     if(res !== "再来一次" && extraCount <= 0){
+         if (!usedCodes.includes(code)) {
+             usedCodes.push(code);
+             localStorage.setItem('usedLot', JSON.stringify(usedCodes));
+         }
+     }
      prizeRecords.push({ code: code, date: dateStr, prize: res });
      localStorage.setItem('prizeRecords', JSON.stringify(prizeRecords));
-     // 修复：无论中什么奖品，直接标记该抽奖码已使用，永久禁止重复提交
-     if (!usedCodes.includes(code)) {
-         usedCodes.push(code);
-         localStorage.setItem('usedLot', JSON.stringify(usedCodes));
-     }
-     // 实物奖品提示兑换
      if (res !== '谢谢惠顾') {
          saveTip.style.display = 'block';
      }
-     // 再来一次仅当前弹窗内临时生效，关闭弹窗清空次数
      if (res === '再来一次') {
          extraCount += 1;
          tipDom.innerText = '获得再来一次！可继续抽奖一次。';
          tipDom.style.display = 'block';
+     }else{
+         extraCount = 0;
      }
  };
  </script>
